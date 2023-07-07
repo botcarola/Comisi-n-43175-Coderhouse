@@ -287,3 +287,341 @@ Por ejemplo:
 let isBoss = confirm("¿Eres el jefe?");
 
 alert( isBoss ); // true si se pulsa OK
+
+______________________________________________________________________________
+
+INFO ADICIONAL ANTES DEL TEMA DE LA CLASE
+
+VALORES VACÍOS 
+
+Existen dos valores especiales, escritos como null y undefined, que son usados para denotar la ausencia de un valor significativo. Son en si mismos valores, pero no traen consigo información.
+
+Muchas operaciones en el lenguaje que no producen un valor significativo, producen undefined simplemente porque tienen que producir algún valor.
+
+NULL 
+
+El valor especial null no pertenece a ninguno de los tipos de datos existentes.
+
+Forma un tipo propio separado que contiene sólo el valor null:
+
+let gustoDeHelado = null;
+
+En JavaScript, null no es una “referencia a un objeto inexistente” o un “puntero nulo” como en otros lenguajes.
+
+Es sólo un valor especial que representa “nada”, “vacío” o “valor desconocido”.
+
+El código anterior indica que el valor de gustoDeHelado es desconocido o está vacío por alguna razón.
+
+UNDEFINED
+
+El valor especial undefined también se distingue. Hace un tipo propio, igual que null.
+
+El significado de undefined es “valor no asignado”.
+
+Si una variable es declarada, pero no asignada, entonces su valor es undefined:
+
+let edad;
+
+alert(edad); // muestra "undefined"
+
+Técnicamente, es posible asignar undefined a cualquier variable:
+
+let esEstudiante = undefined;
+
+…Pero no recomendamos hacer eso. Normalmente, usamos null para asignar un valor “vacío” o “desconocido” a una variable, mientras undefined es un valor inicial reservado para cosas que no han sido asignadas.
+
+ADEMÁS null es un valor que es permitido en la transmisión de datos, en cambio undefined no lo es.
+
+-------------------------------
+
+CLASE 2: CONTROL DE FLUJO
+
+Es frecuentemente útil tener un valro que distingue entre solo dos posibilidades, como "si" y "no", "encendido" y "apagado". Para este propósito, JavaScript tiene el tipo BOOLEAN, que tiene solo dos valores: true (verdadero) y false (falso) que se escriben de la misma forma.
+
+Ejemplos:
+
+const encendido = true;
+const apagado = false;
+
+Los valores booleanos también son el resultado de comparaciones:
+
+let isGreater = 4 > 1;
+
+alert( isGreater ); // verdadero (el resultado de la comparación es "sí")
+
+Ahondaré más al respecto luego.
+
+VALORES FALSOS EN JAVASCRIPT
+
+Un valor falso es algo que se evalúa como false, por ejemplo, cuando se comprueba una variable. Solo hay ser valores falsos en JavaScript:
+
+undefined, null, NaN, 0 y "" (cadena vacía) y false por supuesto.
+
+OPERADORES DE COMPARACIÓN
+
+Conocemos muchos operadores de comparación de las matemáticas:
+
+- Mayor/menor que: a > b, a < b.
+
+- Mayor/menor o igual que: a >= b, a <= b.
+
+- Igual: a == b (ten en cuenta que el doble signo == significa comparación, mientras que un solo símbolo a = b significaría una asignación).
+Distinto. En matemáticas la notación es ≠, pero en JavaScript se escribe como una asignación con un signo de exclamación delante: a != b.
+
+BOOLEANO ES EL RESULTADO
+
+Como todos los demás operadores, una comparación retorna un valor. En este caso, el valor es un booleano.
+
+true – significa “sí”, “correcto” o “verdad”.
+false – significa “no”, “equivocado” o " no verdad".
+
+Entonces:
+
+console.log( 2 > 1 ) ---> true
+console.log( 2 == 1 ) ---> false
+console.log( 2 != 1 ) ---> true
+
+El resultado de una comparación puede asignarse a una variable, igual que cualquier valor:
+
+let result = 5 > 4; // asignar el resultado de la comparación
+alert( result ); // true
+
+UNA COMPARACIÓN GRACIOSA 
+
+Es posible que al mismo tiempo:
+
+Dos valores sean iguales.
+Uno de ellos sea true como booleano y el otro sea false como booleano.
+Por ejemplo:
+
+let a = 0;
+alert( Boolean(a) ); // false
+
+let b = "0";
+alert( Boolean(b) ); // true
+
+alert( a == b ); // true!
+Desde el punto de vista de JavaScript, este resultado es bastante normal. Una comparación de igualdad convierte valores utilizando la conversión numérica (de ahí que "0" se convierta en 0), mientras que la conversión explícita Boolean utiliza otro conjunto de reglas.
+
+IGUALDAD ESTRICTA
+
+Una comparación regular de igualdad == tiene un problema. No puede diferenciar 0 de `falso’:
+
+alert( 0 == false ); // true
+Lo mismo sucede con una cadena vacía:
+
+alert( '' == false ); // true
+
+Esto sucede porque los operandos de diferentes tipos son convertidos a números por el operador de igualdad ==. Una cadena vacía, al igual que false, se convierte en un cero.
+
+¿Qué hacer si queremos diferenciar 0 de false?
+
+Un operador de igualdad estricto === comprueba la igualdad sin conversión de tipo.
+
+En otras palabras, si a y b son de diferentes tipos, entonces a === b retorna inmediatamente false sin intentar convertirlos.
+
+Intentémoslo:
+
+alert( 0 === false ); // falso, porque los tipos son diferentes
+Existe también un operador de “diferencia estricta” !== análogo a !=.
+
+El operador de igualdad estricta es un poco más largo de escribir, pero hace obvio lo que está pasando y deja menos espacio a errores.
+
+COMPARACIÓN CON NULOS E INDEFINIDOS 
+
+Veamos más casos extremos.
+
+Hay un comportamiento no intuitivo cuando se compara null o undefined con otros valores.
+
+Para un control de igualdad estricto ===
+Estos valores son diferentes, porque cada uno de ellos es de un tipo diferente.
+
+alert( null === undefined ); // false
+Para una comparación no estricta ==
+Hay una regla especial. Estos dos son una " pareja dulce ": son iguales entre sí (en el sentido de ==), pero no a ningún otro valor.
+
+alert( null == undefined ); // true
+
+Para matemáticas y otras comparaciones < > <= >=
+null/undefined se convierten en números: null se convierte en 0, mientras que undefined se convierte en NaN.
+
+---------------------------------------------
+
+OPERADORES LÓGICOS
+
+Hay cuatro operadores lógicos en JavaScript: || (O), && (Y), ! (NO), ?? (Fusión de nulos).
+
+Aunque sean llamados lógicos, pueden ser aplicados a valores de cualquier tipo, no solo booleanos. EL RESULTADO PUEDE SER DE CUALQUIER TIPO
+
+|| (OR)
+El operador OR se representa con dos símbolos de linea vertical:
+
+result = a || b;
+En la programación clásica, el OR lógico esta pensado para manipular solo valores booleanos. Si cualquiera de sus argumentos es true, retorna true, de lo contrario retorna false.
+
+En JavaScript, el operador es un poco más complicado y poderoso. Pero primero, veamos qué pasa con los valores booleanos.
+
+Hay cuatro combinaciones lógicas posibles:
+
+alert(true || true); // true (verdadero)
+alert(false || true); // true
+alert(true || false); // true
+alert(false || false); // false (falso)
+
+Como podemos ver, el resultado es siempre true excepto cuando ambos operandos son false.
+
+Si un operando no es un booleano, se lo convierte a booleano para la evaluación.
+
+Por ejemplo, el número 1 es tratado como true, el número 0 como false:
+
+if (1 || 0) { // Funciona como if( true || false )
+  alert("valor verdadero!");
+}
+
+La mayoría de las veces, OR || es usado en una declaración if para probar si alguna de las condiciones dadas es true.
+
+Por ejemplo:
+
+let hour = 9;
+
+if (hour < 10 || hour > 18) {
+  alert( 'La oficina esta cerrada.' );
+}
+Podemos pasar mas condiciones:
+
+let hour = 12;
+let isWeekend = true;
+
+if (hour < 10 || hour > 18 || isWeekend) {
+  alert("La oficina esta cerrada."); // Es fin de semana
+}
+
+&& (AND)
+El operador AND es representado con dos ampersands &&:
+
+result = a && b;
+En la programación clásica, AND retorna true si ambos operandos son valores verdaderos y false en cualquier otro caso.
+
+alert(true && true); // true
+alert(false && true); // false
+alert(true && false); // false
+alert(false && false); // false
+Un ejemplo con if:
+
+let hour = 12;
+let minute = 30;
+
+if (hour == 12 && minute == 30) {
+  alert("La hora es 12:30");
+}
+Al igual que con OR, cualquier valor es permitido como operando de AND:
+
+if (1 && 0) { // evaluado como true && false
+  alert( "no funcionará porque el resultado es un valor falso" );
+}
+
+! (NOT)
+El operador booleano NOT se representa con un signo de exclamación !.
+
+La sintaxis es bastante simple:
+
+result = !value;
+El operador acepta un solo argumento y realiza lo siguiente:
+
+Convierte el operando al tipo booleano: true/false.
+Retorna el valor contrario.
+Por ejemplo:
+
+alert(!true); // false
+alert(!0); // true
+Un doble NOT !! es a veces usado para convertir un valor al tipo booleano:
+
+alert(!!"cadena de texto no vacía"); // true
+alert(!!null); // false
+Eso es, el primer NOT convierte el valor a booleano y retorna el inverso, y el segundo NOT lo invierte de nuevo. Al final, tenemos una simple conversión a booleano.
+
+Hay una manera un poco mas prolija de realizar lo mismo – una función integrada Boolean:
+
+alert(Boolean("cadena de texto no vacía")); // true
+alert(Boolean(null)); // false
+La precedencia de NOT ! es la mayor de todos los operadores lógicos, así que siempre se ejecuta primero, antes que && o ||.
+
+---------------------------------------
+
+Ejecución condicional: if, '?'
+A veces necesitamos que, bajo condiciones diferentes, se ejecuten acciones diferentes.
+
+Para esto podemos usar la sentencia if y el “operador condicional” ?.
+
+La sentencia “if”
+La sentencia if(...) evalúa la condición en los paréntesis, y si el resultado es verdadero (true), ejecuta un bloque de código.
+
+Por ejemplo:
+
+let year = prompt('¿En que año fué publicada la especificación ECMAScript-2015?', '');
+
+if (year == 2015) alert( '¡Estás en lo cierto!' );
+Aquí la condición es una simple igualdad (year == 2015), pero podría ser mucho más compleja.
+
+Si queremos ejecutar más de una sentencia, debemos encerrar nuestro bloque de código entre llaves:
+
+if (year == 2015) {
+  alert( "¡Es Correcto!" );
+  alert( "¡Eres muy inteligente!" );
+}
+
+Recomendamos encerrar nuestro bloque de código entre llaves {} siempre que se utilice la sentencia if, incluso si solo se va a ejecutar una sola sentencia. Al hacerlo mejoramos la legibilidad.
+
+Conversión Booleana
+La sentencia if (…) evalúa la expresión dentro de sus paréntesis y convierte el resultado en booleano.
+
+Recordemos las reglas de conversión del capítulo Conversiones de Tipos:
+
+El número 0, un string vacío "", null, undefined, y NaN, se convierten en false. Por esto son llamados valores “falsos”.
+El resto de los valores se convierten en true, entonces los llamaremos valores “verdaderos”.
+Entonces, el código bajo esta condición nunca se ejecutaría:
+
+if (0) { // 0 es falso
+  ...
+}
+…y dentro de esta condición siempre se ejecutará:
+
+if (1) { // 1 es verdadero
+  ...
+}
+También podemos pasar un valor booleano pre-evaluado al if, así:
+
+let cond = (year == 2015); // la igualdad evalúa y devuelve un true o false
+
+if (cond) {
+  ...
+}
+La cláusula “else”
+La sentencia if puede contener un bloque else (“si no”, “en caso contrario”) opcional. Este bloque se ejecutará cuando la condición sea falsa.
+
+Por ejemplo:
+
+let year = prompt('¿En qué año fue publicada la especificación ECMAScript-2015?', '');
+
+if (year == 2015) {
+  alert( '¡Lo adivinaste, correcto!' );
+} else {
+  alert( '¿Cómo puedes estar tan equivocado?' ); // cualquier valor excepto 2015
+}
+Muchas condiciones: “else if”
+A veces queremos probar más de una condición. La clausula else if nos permite hacer esto.
+
+Por ejemplo:
+
+let year = prompt('¿En qué año fue publicada la especificación ECMAScript-2015?', '');
+
+if (year < 2015) {
+  alert( 'Muy poco...' );
+} else if (year > 2015) {
+  alert( 'Muy Tarde' );
+} else {
+  alert( '¡Exactamente!' );
+}
+En el código de arriba, JavaScript primero revisa si year < 2015. Si esto es falso, continúa a la siguiente condición year > 2015. Si esta también es falsa, mostrará la última alert.
+
+Podría haber más bloques else if. Y el último else es opcional.
