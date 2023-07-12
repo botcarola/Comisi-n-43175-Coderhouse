@@ -625,3 +625,172 @@ if (year < 2015) {
 En el código de arriba, JavaScript primero revisa si year < 2015. Si esto es falso, continúa a la siguiente condición year > 2015. Si esta también es falsa, mostrará la última alert.
 
 Podría haber más bloques else if. Y el último else es opcional.
+
+_____________________________________________________________________
+
+CLASE 3 | BUCLES 
+
+Una de las principales ventajas de la programación es la posibilidad de crear bucles y repeticiones para tareas específicas, y que no tengamos que realizar el mismo código varias veces de forma manual.
+
+Los bucles nos permiten sumplificar nuestro código, que sea más fácil de leer e incluso más fácil de modificar y mantener.
+
+CONDICIÓN
+
+Al igual que en los condicionales if, en los bucles se va a evaluar una condición para saber si se debe seguir repitiendo el bucle o se debe finalizar. Habitualmente, lo que se suele hacer es establecer que si la condición es verdadera, se vuelve a repetir el bucle. Por el contratio, si es falsa, se finaliza. Sin embargo, esta condición puede variar dependiendo de la implementación que le indique el programador.
+
+ITERACIÓN
+
+Otro concepto que usaremos mucho dentro de un bucle es el concepto de iteración. Esto se refuere a cada una de las repeticiones de un bucle. 
+
+INCREMENTO
+
+Al igual que tenemos un contador en un bucle, también debemos tener una parte donde hagamos un incremento (o decremento) de dicho contador. Si no lo tuvieramos, el contador no cambiaría y la condición síempre sería verdadera, por lo que sería imposible salir del bucle.
+
+BUCLE INFINITO
+
+Cuando estamos aprendiendo a programar, es muy común que cometamos un error creando el bucle y nos quedemos en un bucle infinito, es decir, en una situación donde nuestro programa se queda eternamiente en bucle y nunca termina. Como programadores, esta situación siempre hay que evitarla. Para ello, lo que debemos hacer es siempre comprobar que existe un incremento (o decremento) y que en algún momento la condición va a ser falsa y se podrá salir del bucle.
+
+- Tener en cuenta que de producirse un bucle infinito, nuestro programa se uqedará atascado y tendremos que forzar para finalizarlo. Ten siempre cuidado al crear un bucle para que no sea infinito. -
+
+
+for loop
+
+Sintaxis
+
+for ([initializacion]); [condicion]; [expresion-final]) {
+   // sentencias
+}
+
+La sentencia for en javascript consiste de tres expresiones y una declaración:
+
+- inicialización - Sucede antes de la primera ejecución del bucle. Esta expresión es comúnmente utilizada para crear contadores. Las variables creadas tienen un alcance (scope) limitado al cuerpo del bucle. Una vez que el bucle ha terminado su ejecución las variables son destruidas.
+
+- condición - Expresión que es evaluada antes de la ejecución de cada iteración. Si se omite, esta expresión es evaluada como verdadera. Si devuelve true, la sentencia del cuerpo del bucle se ejecuta. Si devuelve false, el bucle se detiene.
+
+- expresión-final - Expresión que se ejecuta luego de cada iteración. Usualmente es utilizada para incrementar un contador. Pero también puede ser utilizada para decrementar el contador.
+
+- sentencia o declaración - Código que será ejecutado repetidamente por el bucle.
+
+Cualquiera de estas tres expresiones o la sentencia del cuerpo del bucle pueden ser omitidas. Los bucles For son comúnmente utilizados para contar un cierto número de iteraciones para repetir una sentencia. Puedes utilizar una sentencia break para salir del bucle antes que la expresión de condición devuelva false.
+
+EJEMPLO
+
+for (i=1;i<=6;i++) { 
+    // document.write("<H" + i + ">Encabezado de nivel " + i + "</H" + i + ">") 
+    document.write(`<h2>Este es el encabezado ${i}</h2>`)
+}
+
+while loop
+
+El bucle while empieza por evaluar la condición. Si la condición es verdadera (devuelve true), entonces las sentencias son ejecutadas. Si la condición es falsa (devuelve false), entonces las sentencias no son ejecutadas. Luego el bucle finaliza.
+
+Aquí la sintaxis del bucle while:
+
+Sintaxis:
+
+while (condicion)
+
+{
+
+  sentencia(s);
+
+}
+
+- sentencia(s): Una sentencia es código que se ejecuta si la condición devuelve verdadero ( true ).
+
+- condición: Es una expresión booleana (Boolean) que es evaluada antes de cada paso (iteración) por el bucle. Si esta condición evalúa a verdadero ( true ), las sentencias son ejecutadas. Cuando la condición evalúa a falso ( false ), la ejecución continúa con la siguiente sentencia luego del bucle while.
+
+EJEMPLO
+
+let i = 0;
+while (i < 3) { // muestra 0, luego 1, luego 2
+  alert( i );
+  i++;
+}
+
+
+
+
+La sentencia "switch"
+
+Una sentencia switch puede reemplazar múltiples condiciones if.
+
+Provee una mejor manera de comparar un valor con múltiples variantes.
+
+switch(x) {
+  case 'valor1':  // if (x === 'valor1')
+    ...
+    [break]
+
+  case 'valor2':  // if (x === 'valor2')
+    ...
+    [break]
+
+  default:
+    ...
+    [break]
+}
+
+EJEMPLO
+
+let a = 2 + 2;
+
+switch (a) {
+  case 3:
+    alert( 'Muy pequeño' );
+    break;
+  case 4:
+    alert( '¡Exacto!' );
+    break;
+  case 5:
+    alert( 'Muy grande' );
+    break;
+  default:
+    alert( "Desconozco estos valores" );
+}
+
+Aquí el switch inicia comparando a con la primera variante case que es 3. La comparación falla.
+
+Luego 4. La comparación es exitosa, por tanto la ejecución empieza desde case 4 hasta el break más cercano.
+
+Si no existe break entonces la ejecución continúa con el próximo case sin ninguna revisión.
+
+Agrupamiento de “case”
+Varias variantes de case los cuales comparten el mismo código pueden ser agrupadas.
+
+Por ejemplo, si queremos que se ejecute el mismo código para case 3 y case 5:
+
+let a = 2 + 2;
+
+switch (a) {
+  case 4:
+    alert('¡Correcto!');
+    break;
+
+  case 3:                    // (*) agrupando dos cases
+  case 5:
+    alert('¡Incorrecto!');
+    alert("¿Por qué no tomas una clase de matemáticas?");
+    break;
+
+  default:
+    alert('El resultado es extraño. Realmente.');
+}
+
+TAREA: SOBREESCRIBIR EL SIGUIENTE SWITCH EN IF
+
+switch (navegador) {
+  case 'Edge':
+    alert( "¡Tienes Edge!" );
+    break;
+
+  case 'Chrome':
+  case 'Firefox':
+  case 'Safari':
+  case 'Opera':
+    alert( 'Esta bien, soportamos estos navegadores también' );
+    break;
+
+  default:
+    alert( '¡Esperamos que esta página se vea bien!' );
+}

@@ -11,6 +11,15 @@
 //     "Amarillo" --> false
 //     "SALKDASD" --> false
 
+// let valorSemaforoActual = "amarillo"
+
+// if ( valorSemaforoActual === "amarillo" || valorSemaforoActual === "rojo") {    
+//     console.log(false)
+// } else if ( valorSemaforoActual === "verde" ) {
+//     console.log(true)
+// } else {
+//     console.log("error: color de semáforo inválido")
+// }
 
 // 2) Crear una estructura condicional que compare el valor de una variable con las vocales y devuelva un mensaje en consola "Es una vocal" si letra es una vocal o "No es una vocal" si no lo es.
 
@@ -28,6 +37,20 @@
 //     '2130213' // false
 
 // 4) Crear una estructura condicional que compare tres valores booleanos: pasoTests, tieneMultasImpagas y pagoImpuestos, y devuelva un mensaje en consola que sea true si una persona está habilitada para renovar su carnet de conducir o false si no. Una persona puede renovar su carnet si pasó los tests, no tiene multas impagas y pagó todos los impuestos.
+
+let pasoTest = true;
+let tieneMultasImpagas = false;
+let pagoImpuestos = true;
+
+if ( pasoTest === true && pagoImpuestos === true && tieneMultasImpagas === false ) {
+
+    console.log(true)
+
+} else {
+    console.log(false)
+}
+
+
 
 // EJEMPLIFICACIÓN DE CASOS
 // (true, true, true)    // false
