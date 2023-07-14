@@ -65,10 +65,31 @@ if ( pasoTest === true && pagoImpuestos === true && tieneMultasImpagas === false
 
 // 5) Crear una estructura condicional que tome como valor un numero y devuelva un mensaje en consola "Es par" si el numero es par, o "Es impar" si el numero es impar. (AVERIGUAR SOBRE OPERADOR RESTO EN JAVASCRIPT, googlear es parte de nuestro trabajo)
 
+// const numero = Number(prompt("Ingrese un número"))
+
+// if ( numero % 2 === 0 ) {
+//     console.log("Es par")
+// } else {
+//     console.log("Es impar")
+// }
+
+
 // 6) Crear una estructura condicional que tome como valor un numero y devuelva un mensaje en consola "Es positivo" si el número es positivo o "Es negativo" si el número es negativo
 
 // EJEMPLIFICACIÓN DE CASOS
 // esPositivoONegativo(3)  // 'Es positivo'
 // esPositivoONegativo(-5) // 'Es negativo'
 
+const numeroAValidar = Number(prompt("Ingrese un número"))
+console.log(numeroAValidar)
+console.log(typeof numeroAValidar)
+
+
+if ( numeroAValidar > 0 ) {
+    console.log("Es positivo")
+} else if ( numeroAValidar < 0 ) {
+    console.log("Es negativo")
+} else if ( Boolean(numeroAValidar) === false  ) {
+    console.log("eso no es un número")
+}
 

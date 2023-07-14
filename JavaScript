@@ -794,3 +794,187 @@ switch (navegador) {
   default:
     alert( '¡Esperamos que esta página se vea bien!' );
 }
+
+--------------------------------------------------------------------------
+
+CLASE 4: FUNCIONES 
+
+Las funciones son bloques de código que solucionan un problema específico para ser reutilizados. Existen dos tipos de funciones: declarativas y expresivas.
+
+Ya hemos visto ejemplos de funciones integradas, como alert(message), prompt(message, default) y confirm(question). Pero también podemos crear funciones propias.
+
+QUÉ SON LAS FUNCIONES DECLARATIVAS?
+
+- En JavaScript, las funciones declarativas se las declara con la palabra reservada function.
+
+CÓMO DECLARAR UNA FUNCIÓN DECLARATIA?
+
+- La declaración de una función declarativa está constituido por las siguientes partes:
+
+* La palabra reservada function.
+* El nombre de la función: el cual será guardado como referencia en memoria.
+* Los parámetros: están envueltas en paréntesis (), son variables propias de la función y deberán utilizarse en el contenido. Hacen referencia a los argumentos en la invocación.
+* El contenido: está envuelto por llaves {}, contendrá las líneas de código correspondientes a la lógica del problema.
+* El valor retornado: es un único valor que devuelve la función cuando es llamada. Se lo especifica por la palabra reservada return. Si no existe, la función devolverá un valor undefined por defecto.
+
+SINTAXIS
+
+/* 
+function nombre (parámetros) {
+    contenido
+    return valor
+} 
+*/
+
+
+EJEMPLO
+
+// Declaración
+function suma (a,b){
+    return a + b
+}
+
+
+De esta manera, definimos la lógica de la función, pero no la estamos utilizando. Para generar los valores es necesario invocar la función en el código según sea necesario.
+
+CÓMO INVOCAR UNA FUNCIÓN DECLARATIVA?
+
+La invocación o llamada es la manera que utilizamos las funciones para utilizar el valor de retorno (return) según ciertos argumentos. La invocación de la función declarativa está constituido por dos partes:
+
+- El nombre de la función especificada en la declaración.
+- Los argumentos, son los valores para cada uno de parámetros de la función envueltos entre paréntesis.
+
+EJEMPLO
+
+// Invocación
+suma(2,3)
+// nombre(argumentos)
+
+La invocación sirve para emplear una función con diferentes argumentos y guardarlos en una variable.
+
+const resultado1 = suma(2,3)
+const resultado2 = suma(4,6)
+const resultado3 = suma(10,12)
+
+console.log(resultado1) //5
+console.log(resultado2) //10
+console.log(resultado3) //22
+
+También existen funciones que simplemente se invocan, pero debes tener en cuenta que retornan por defecto undefined.
+
+// Declaración
+function saludar(nombre){
+    console.log("Hola " + nombre) 
+}
+// Invocaciones
+saludar("JavaScript") //"Hola JavaScript"
+saludar("Carola") // "Hola Carola"
+
+QUÉ SON LAS FUNCIONES EXPRESIVAS O ANÓNIMAS
+
+Las funciones expresivas o anónimas consisten en guardar la función en una variable. Tienen la misma declaración e invocación que las funciones declarativas. La diferencia consiste en no especificar un nombre en la función, sino que utiliza el nombre de la variable.
+
+// Declaración
+var suma = function (a, b) {
+  return a + b
+}
+// Invocación
+var resultado = suma(2, 2)
+
+console.log(resultado) //4
+
+
+DIFERENCIA ENTRE UNA FUNCIÓN CON NOMBRE Y UNA ANÓNIMA 
+
+- Cuando declaramos una función anónima no puede ser procesada hasta que el intérprete llegue a donde está declarada. El navegador va leyendo la página de arriba abajo, entonces la llamada a la función anónima debe estar siempre más abajo.
+
+- En cambio, si se trata de una función con nombre, el intérprete lo primero que hace es buscar las declaraciones las variables y funciones que puedan existir. Después comienza a leer línea por línea. De modo que podemos poner la llamada a una función antes de que ésta haya sido declarada.
+
+ÁMBITO DE LAS VARIABLES 
+
+Las variables que se declaran dentro de una función sólo existen durante la ejecución de esa función. Son variables locales. Aunque exista otra variable con el mismo nombre fuera de la función, una no modifia a la otra.
+
+EJ
+
+function fechaHoy() {
+    //fecha es una variable local de la función
+    const fecha = new Date();
+    return fecha;
+}
+
+También podemos utilizar una variable global dentro de una función y que los cambios que se hagan afecten a la misma.
+
+let diaDeHoy;
+
+function fechaHoy() {
+    //fecha es una variable local de la función
+    const fecha = new Date();
+    diaDeHoy = fecha;
+};
+
+console.log(diaDeHoy) ---> mostrará la fecha actual
+
+VARIABLES GLOBALES 
+
+- Variables declaradas fuera de cualquier función, como la variable diaDeHoy en el código anterior, se llaman globales.
+
+- Las variables globales son visibles desde cualquier función (a menos que se les superpongan variables locales con el mismo nombre).
+
+Es una buena práctica reducir el uso de variables globales. El código moderno tiene pocas o ninguna variable global. La mayoría de las variables residen en sus funciones. Aunque a veces puede justificarse almacenar algunos datos a nivel de proyecto.
+
+FUNCIONES FLECHA
+
+Hay otra sintaxis muy simple y concisa para crear funciones, que a menudo es mejor que las Expresiones de funciones.
+
+Se llama “funciones de flecha”, porque se ve así:
+
+const func = (arg1, arg2, ..., argN) => expression;
+
+Esto crea una función func que acepta los parámetros arg1..argN, luego evalúa la expression del lado derecho mediante su uso y devuelve su resultado.
+
+En otras palabras, es la versión más corta de:
+
+let func = function(arg1, arg2, ..., argN) {
+  return expression;
+};
+
+let sum = (a, b) => a + b;
+
+/* Esta función de flecha es una forma más corta de:
+
+let sum = function(a, b) {
+  return a + b;
+};
+*/
+
+alert( sum(1, 2) ); // 3
+
+Como puedes ver, (a, b) => a + b significa una función que acepta dos argumentos llamados a y b. Tras la ejecución, evalúa la expresión a + b y devuelve el resultado.
+
+Si solo tenemos un argumento, se pueden omitir paréntesis alrededor de los parámetros, lo que lo hace aún más corto.
+
+Por ejemplo:
+
+let double = n => n * 2;
+// Más o menos lo mismo que: let double = function(n) { return n * 2 }
+
+alert( double(3) ); // 6
+Si no hay parámetros, los paréntesis estarán vacíos; pero deben estar presentes:
+
+let sayHi = () => alert("¡Hola!");
+
+sayHi();
+Las funciones de flecha se pueden usar de la misma manera que las expresiones de función.
+
+Por ejemplo, para crear dinámicamente una función:
+
+let age = prompt("What is your age?", 18);
+
+let welcome = (age < 18) ?
+  () => alert('¡Hola!') :
+  () => alert("¡Saludos!");
+
+welcome();
+Las funciones de flecha pueden parecer desconocidas y poco legibles al principio, pero eso cambia rápidamente a medida que los ojos se acostumbran a la estructura.
+
+Son muy convenientes para acciones simples de una línea, cuando somos demasiado flojos para escribir muchas palabras.
