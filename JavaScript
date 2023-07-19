@@ -978,3 +978,121 @@ welcome();
 Las funciones de flecha pueden parecer desconocidas y poco legibles al principio, pero eso cambia rápidamente a medida que los ojos se acostumbran a la estructura.
 
 Son muy convenientes para acciones simples de una línea, cuando somos demasiado flojos para escribir muchas palabras.
+
+_______________________________________________________________________________
+
+CLASE 5: OBJETOS 
+
+Los números, los booleanos y los strings son los átomos que constituyen las
+estructuras de datos. Sin embargo, muchos tipos de información requieren más de un átomo. Los objetos nos permiten agrupar valores—incluidos otros objetos— para construir estructuras más complejas.
+
+Los programas que hemos construido hasta ahora han estado limitados por el hecho de que estaban operando solo en tipos de datos simples.
+
+Como aprendimos hay ocho tipos de datos en JavaScript. Siete de ellos se denominan “primitivos”, porque sus valores contienen solo un dato (sea un string, un número o lo que sea).
+
+En contraste, los objetos son usados para almacenar colecciones de varios datos y entidades más complejas asociados con un nombre clave. En JavaScript, los objetos penetran casi todos los aspectos del lenguaje. Por lo tanto, debemos comprenderlos primero antes de profundizar en cualquier otro lugar.
+
+Podemos crear un objeto usando las llaves {…} con una lista opcional de propiedades. Una propiedad es un par “key:value”, donde key es un string (también llamado “nombre clave”), y value puede ser cualquier cosa. 
+Para fines prácticos de la lección, nos referiremos a este par de conceptos como “clave:valor”.
+
+let user = new Object(); // sintaxis de "constructor de objetos"
+let user = {};  // sintaxis de "objeto literal"
+
+- Normalmente se utilizan las llaves {...}. Esa declaración se llama objeto literal.
+
+- Podemos poner inmediatamente algunas propiedades dentro de {...} como pares “clave:valor”:
+
+let user = {     // un objeto
+  name: "John",  // En la clave "name" se almacena el valor "John"
+  age: 30        // En la clave "age" se almacena el valor 30
+};
+
+- Una propiedad tiene una clave (también conocida como “nombre” o “identificador”) antes de los dos puntos ":" y un valor a la derecha.
+
+- En el objeto user hay dos propiedades:
+
+* La primera propiedad tiene la clave "name" y el valor "John".
+* La segunda tienen la clave "age" y el valor 30.
+
+TAMBIÉN PODEMOS AGREGAR, ELIMINAR Y LEER ARCHIVOS DE ÉL EN CUALQUIER MOMENTO
+
+- Se puede acceder a los valores de las propiedades utilizando la notación de punto.
+
+// Obteniendo los valores de las propiedades del objeto:
+alert( user.name ); // John
+alert( user.age ); // 30
+
+- El valor puede ser de cualquier tipo. Agreguemos uno booleano:
+
+user.isAdmin = true;
+
+- Para eliminar una propiedad podemos usar el operador delete:
+
+delete user.age;
+
+- También podemos nombrar propiedades con más de una palabra. Pero, de ser así, debemos colocar la clave entre comillas "...":
+
+let user = {
+  name: "John",
+  age: 30,
+  "likes birds": true  // Las claves con más de una palabra deben ir entre comillas
+};
+
+- La última propiedad en la lista puede terminar con una coma:
+
+let user = {
+  name: "John",
+  age: 30,
+}
+
+- Eso se llama una coma “final” o “colgante”. Facilita agregar, eliminar y mover propiedades, porque todas las líneas se vuelven similares.
+
+CORCHETES
+
+- La notación de punto no funciona para acceder a propiedades con claves de más de una palabra:
+
+// Esto nos daría un error de sintaxis
+user.likes birds = true
+
+- JavaScript no entiende eso. Piensa que hemos accedido a user.likes y entonces nos da un error de sintaxis cuando aparece el inesperado birds.
+
+- El punto requiere que la clave sea un identificador de variable válido. Eso implica que: no contenga espacios, no comience con un dígito y no incluya caracteres especiales ($ y _ sí se permiten).
+
+- Existe una “notación de corchetes” alternativa que funciona con cualquier string:
+
+let user = {};
+
+// asignando
+user["likes birds"] = true;
+
+// obteniendo
+alert(user["likes birds"]); // true
+
+// eliminando
+delete user["likes birds"];
+
+Ahora todo está bien. Nota que el string dentro de los corchetes está adecuadamente entre comillas (cualquier tipo de comillas servirían).
+
+Los corchetes también brindan una forma de obtener el nombre de la propiedad desde el resultado de una expresión (a diferencia de la cadena literal). Por ejemplo, a través de una variable:
+
+let key = "likes birds";
+
+// Tal cual: user["likes birds"] = true;
+user[key] = true;
+
+- Aquí la variable key puede calcularse en tiempo de ejecución o depender de la entrada del usuario y luego lo usamos para acceder a la propiedad. Eso nos da mucha flexibilidad.
+
+Por ejemplo:
+
+let user = {
+  name: "John",
+  age: 30
+};
+
+let key = prompt("¿Qué te gustaría saber acerca del usuario?", "name");
+
+// acceso por medio de una variable
+alert( user[key] ); // John (si se ingresara "name")
+
+- La notación de punto no puede ser usada de manera similar:
+
