@@ -1195,3 +1195,159 @@ const lastItem = letters.length - 1;
 
 letters[lastItem];    // "c"
 
+_________________________________________________________________________________
+
+CLASE 7: FUNCIONES DE ORDEN SUPERIOR
+
+Las funciones son un concepto muy importante en JavaScript. Dominarlas es una necesidad.
+
+Recapitulando, ¿Qué es una función?
+
+Es necesario pensarlas como palabras en nuestro lenguaje. Diferentes vocabularios nos ayudan a evitar repetir las mismas palabras. Por ejemplo, en lugar de decir "una persona entre 13 y 19 años", podemos utilizar el término adolescente. Esto nos proporciona la libertad de usar esta palabra para formar diferentes oraciones sin generar confusiones.
+
+Las funciones siguen un patrón similar, nos permiten envolver un programa completo en una sola expresión (que en este caso se alojaría bajo un identificador). Entonces podemos llamar a esta expresión como nuestro nuevo vocabulario. Luego podemos utilizarla en cualquier parte de nuestro código para hacer cosas diferentes.
+
+EJEMPLO
+
+// Esta es el nuevo vocabulario o expresión, que resume la operación suma
+// Dentro de esta función, se combinan parámetros y operadores, para dar lugar a un nuevo resultado
+// Esta función retorna un nuevo valor, a partir de valores anteriores
+// La función suma no existía antes en JavaScript, pero nosotros hemos creado una nueva expresión, extendiendo el vocabulario de JavaScript
+// Ahora JavaScript puede realizar esta nueva "abstracción" llamada suma.
+
+const suma = ( a, b ) => a + b
+
+// Podemos usar esta suma para muchas cosas, como por ejemplo calcular el salario neto y el aguinaldo
+
+const totalSalarioYAguinaldo = ( a, b ) => {
+  return suma(a, b)
+}
+
+console.log(totalSalarioYAguinaldo(100000, 50000)) // 150000
+
+// Podemos usar esta suma para hacer una calculadora
+
+const restar = ( a ,  b ) => a - b
+const dividir = ( a, b ) => a / b
+const multiplicar = ( a, b ) => a * b
+
+const calculadora = ( a , b, operacion ) => {
+  return operacion(a, b)
+}
+
+console.log( calculadora(10, 10, multiplicar))
+console.log( calculadora(123213213, 100000000, dividir))
+
+
+// Podemos usar la función suma, para calcular lo que sea
+
+if ( suma(10, 100) % 2 === 0 ){
+  console.log("Es número par")
+} else {
+  console.log("Es número impar")
+}
+
+ENTONCES
+
+- La capacidad de envolver una lógica en una sola expresión es muy poderoso.
+
+- Puede hacer que nuestro código sea legible y fácilmente mantenible
+
+- En caso de que tengamos que hacer cambios, podemos hacerlo en un solo lugar, el lugar donde definimos lo que debe hacer la función y no dónde la usamos.
+
+- Las funciones nos ayudan a evitar la repetición. Definimos una vez y la usamos en diferentes contextos. Esto puede salvarnos de muchos errores.
+
+PERO, ¿A QUÉ VIENE TODO ESTO? 
+
+Pensémoslo desde otra perspectiva. Supongamos que debemos desarrollar el algoritmo calculadora y este se aloja en su totalidad en una sola función. Este programa grande será muy costoso  y no solo por el tiempo, sino por la complejidad que va a involucrar y eso puede generar, como consecuencia, mucha confusión. 
+
+Las confusiones generan errores y proporcionan espacio a que los bugs se desarrollen.
+
+PREVENGAMOS CON ABSTRACCIÓN
+
+- En el contexto de la programación, la idea de separar o aislar la lógica de un algoritmo en funciones más pequeñas y especializadas a la resolución de una tarea, son llamadas abstracciones.
+
+- Las abstracciones esconden los detalles y nos dan la capacidad de hablar acerca de los problemas a un nivel superior.
+
+* Como una analogía, compara estas dos recetas de sopa de guisantes:
+
+Coloque 1 taza de guisantes secos por persona en un recipiente. Agregue agua hasta que los guisantes esten bien cubiertos. Deje los guisantes en agua durante al menos 12 horas. Saque los guisantes del agua y pongalos en una cacerola para cocinar. Agregue 4 tazas de agua por persona. Cubra la sartén y mantenga los guisantes hirviendo a fuego lento durante dos horas. Tome media cebolla por persona. Cortela en piezas con un cuchillo. Agréguela a los guisantes. Tome un tallo de apio por persona. Cortelo en pedazos con un cuchillo. Agréguelo a los guisantes. Tome una zanahoria por persona. Cortela en pedazos. Con un cuchillo! Agregarla a los guisantes. Cocine por 10 minutos más.
+
+* Y la segunda receta:
+
+Por persona: 1 taza de guisantes secos, media cebolla picada, un tallo de apio y una zanahoria.
+
+Remoje los guisantes durante 12 horas. Cocine a fuego lento durante 2 horas en 4 tazas de agua (por persona). Picar y agregar verduras. Cocine por 10 minutos más.
+
+- La segunda receta es más corta y fácil de interpretar. Pero necesitas entender algunas palabras más relacionadas a la cocina -remojar, cocinar a fuego lento, picar, etc-
+
+- Cuando programamos, no podemos confiar en que todas las palabras que necesitaremos estarán esperando por nosotros en el diccionario.
+
+- Por ello, debemos ir desarrollando cada concepto ( cada abstrácción ), para ampliar este "vocabulario" y así generar una abstracción más alta.
+
+FUNCIONES DE PRIMERA CLASE
+
+A todo esto, en ningún momento nos preguntamos cómo es que podemos manipular funciones así como así. 
+
+Se dice que se tienen "Funciones de primera clase" cuando las funciones en ese lenguaje son tratadas como cualquier otra variable.
+
+- Entonces en JavaScript una función puede ser pasada como argumento a otras funciones.
+
+- Puede ser retornada por otra función
+
+- Puede ser asignada a una variable (funciones por expresión)
+
+DOCUMENTACIÓN: https://developer.mozilla.org/es/docs/Glossary/First-class_Function
+
+FUNCIONES DE ORDEN SUPERIOR
+
+Las funciones que operan en otras funciones, ya sea tomándolas como argumentos o retornándolas, se denominan funciones de orden superior.
+
+- Esta característica es incorporada frecuentemente en los lenguajes de programación funcional
+
+Como ya hemos visto que las funciones son valores regulares, no existe nada particularmente notable sobre el hecho de que tales funciones existen. El término proviene de las matemáticas, donde la distinción entre funciones y otros valores se toma más en serio.
+
+Las funciones de orden superior nos permiten abstraer sobre acciones, no solo sobre valores. Estas vienen en varias formas. Por ejemplo:
+
+- Podemos crear funciones que crean nuevas funciones
+
+- Podemos tener funciones que cambien otras funciones
+
+- Podemos escribir funciones que proporcionen nuevos tipos de control de flujo
+
+
+FUNCIONES CALLBACK
+
+Las funciones callback (retrollamados) son funciones que se pasan a otras funciones como argumentos y son llamadas por la función en la que se pasan.
+
+- Simplemente, las funciones callback son funciones que escribimos como argumentos en otras funciones. 
+
+- No podemos invocar funciones callback. 
+
+- Se invocan cuando se llama a la función principal en la que se pasaron como argumentos.
+
+PRINCIPIOS DE LA PROGRAMACIÓN FUNCIONAL 
+
+Hay algunos principios que debemos comprender si nuestros programas deben calificar para el estándar de programación funcional. Echemos un vistazo a esos.
+
+- Evite mutaciones y efectos secundarios 
+
+El primer principio de la programación funcional es evitar cambiar las cosas. Una función no debería cambiar nada, como una variable global.
+
+Esto es muy importante porque los cambios a menudo provocan errores. Si una función cambia una variable global, por ejemplo, podría dar lugar a un comportamiento inesperado en todos los lugares donde se utiliza esa variable.
+
+El segundo principio es que una función debe ser pura, lo que significa que no tiene efectos secundarios. En la programación funcional, los cambios que se realizan se denominan mutaciones y los resultados se denominan efectos secundarios.
+
+Una función pura no hace ninguna de las dos. Una función pura siempre tendrá la misma salida para la misma entrada.
+
+Si una función depende de una variable global, esa variable debe pasarse a la función como argumento. Esto nos permite obtener la misma salida para la misma entrada.
+
+Aquí hay un ejemplo:
+
+const edadLegalEnEEUU = 21;
+const chequearEstadoLegal = (edad, edadLegal) => {
+    return edad >= edadLegal ? 'Mayor de edad.' : 'Menor de edad.';
+};
+const johnEstado = chequearEstadoLegal(18, edadLegalEnEEUU);
+johnEstado; // Menor de edad.
+edadLegalEnEEUU; // 21
