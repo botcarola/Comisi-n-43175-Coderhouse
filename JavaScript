@@ -1351,3 +1351,143 @@ const chequearEstadoLegal = (edad, edadLegal) => {
 const johnEstado = chequearEstadoLegal(18, edadLegalEnEEUU);
 johnEstado; // Menor de edad.
 edadLegalEnEEUU; // 21
+
+_________________________________________________________________________________
+
+CLASE 8
+
+MÉTODO EN PROGRAMACIÓN
+
+El término "método" en el contexto de la programación se refiere a una función o procedimiento que está asociado a un objeto o clase específica. Los objetos son instancias de una clase en la programación orientada a objetos (POO). Cada objeto puede tener atributos (variables) y métodos (funciones) que definen su comportamiento y funcionalidad.
+
+Los métodos representan las acciones o comportamientos que un objeto puede realizar. Por ejemplo, si tienes una clase "Coche", los métodos asociados a esta clase podrían ser "arrancar", "detenerse", "acelerar", "girar", etc. Cada uno de estos métodos definirá cómo se realizan esas acciones para un objeto específico de la clase "Coche".
+
+Cuando un programa llama a un método de un objeto, el objeto realiza la acción definida por ese método. Los métodos son esenciales para la programación orientada a objetos, ya que permiten interactuar con los objetos y manipular sus datos de manera estructurada y controlada.
+
+EL OBJETO MATH
+
+- Math es un objeto incorporado que tiene propiedades y métodos para constantes y funciones matemáticas. No es un objeto de función.
+
+- Cuando trabajamos con Javascript, es posible realizar gran cantidad de operaciones matemáticas de forma nativa, sin necesidad de librerías externas. Para ello, haremos uso del objeto Math, un objeto interno de Javascript que tiene incorporadas ciertas constantes y métodos (funciones) para trabajar matemáticamente.
+
+- El objeto Math de Javascript incorpora varias constantes que podemos necesitar en algunas operaciones matemáticas. Veamos su significado y valor aproximado:
+
+Math.E	Número de Euler	2.718281828459045
+
+Math.LN2	Equivalente a Math.log(2)	0.6931471805599453
+
+Math.LN10	Equivalente a Math.log(10)	2.302585092994046
+
+Math.LOG2E	Equivalente a Math.log2(Math.E)	1.4426950408889634
+
+Math.LOG10E	Equivalente a Math.log10(Math.E)	0.4342944819032518
+
+Math.PI	Número PI o Π	3.141592653589793
+
+Math.SQRT1_2	Equivalente a Math.sqrt(1/2).	0.7071067811865476
+
+Math.SQRT2	Equivalente a Math.sqrt(2).	1.4142135623730951
+
+Además de estas constantes, el objeto Math también nos proporciona gran cantidad de métodos o funciones para trabajar con números. Vamos a analizarlos.
+
+MÉTODOS MATEMÁTICOS
+
+Los siguientes métodos matemáticos están disponibles en Javascript a través del objeto Math:
+
+ Math.abs(x)	Devuelve el valor absoluto de x.	|x|
+
+ Math.sign(x) 	Devuelve el signo del número: 1 positivo, -1 negativo
+
+ Math.exp(x)	Exponenciación. Devuelve el número e elevado a x.	ex
+
+ Math.expm1(x) 	Equivalente a Math.exp(x) - 1.	ex-1
+
+ Math.max(a, b, c...)	Devuelve el número más grande de los indicados por parámetro.
+
+ Math.min(a, b, c...)	Devuelve el número más pequeño de los indicados por parámetro.	
+
+ Math.pow(base, exp)	Potenciación. Devuelve el número base elevado a exp.	baseexp
+
+ Math.sqrt(x)	Devuelve la raíz cuadrada de x.	√x
+
+ Math.cbrt(x) 	Devuelve la raíz cúbica de x.	√3x
+
+ Math.imul(a, b) 	Equivalente a a * b, pero a nivel de bits.	
+
+ Math.clz32(x) 	Devuelve el número de ceros a la izquierda de x en binario (32 bits).	
+
+ Veamos algunos ejemplos aplicados a las mencionadas funciones anteriormente:
+
+Math.abs(-5);             // 5
+Math.sign(-5);            // -1
+Math.exp(1);              // e, o sea, 2.718281828459045
+Math.expm1(1);            // 1.718281828459045
+Math.max(1, 40, 5, 15);   // 40
+Math.min(5, 10, -2, 0);   // -2
+Math.pow(2, 10);          // 1024 (Equivale a 2**10)
+Math.sqrt(2);             // 1.4142135623730951 (Equivale a Math.SQRT2)
+Math.cbrt(2);             // 1.2599210498948732
+Math.imul(0xffffffff, 7); // -7
+
+MÉTODO Math.random()
+
+- Uno de los métodos más útiles e interesantes del objeto Math es Math.random().
+
+- Devuelve un número al azar entre 0 y 1 con 16 decimales.
+
+Math.random() es un método en JavaScript que devuelve un número de punto flotante pseudoaleatorio en el rango de 0 (incluido) a 1 (excluido). Esto significa que el número generado será mayor o igual a 0 pero menor que 1. Es importante tener en cuenta que el número generado no es verdaderamente aleatorio, sino que es el resultado de un algoritmo determinista, por lo que se le llama "pseudoaleatorio".
+
+Fórmula:
+
+Math.random() * (max - min) + min;
+
+
+es una forma común de generar un número aleatorio dentro de un rango específico, donde min y max son los límites inferiores y superiores deseados del rango, respectivamente. Desglosemos los pasos uno por uno:
+
+Math.random(): Esta parte genera un número de punto flotante aleatorio entre 0 (incluido) y 1 (excluido). Como mencioné anteriormente, el número generado estará en el rango [0, 1).
+
+(max - min): Esto calcula la diferencia entre el límite superior (max) y el límite inferior (min). Este valor representa el rango de números que deseas generar.
+
+Math.random() * (max - min): Esto multiplica el número aleatorio por el rango. El resultado será un número aleatorio entre 0 (incluido) y el rango (max - min), pero aún no incluyendo el límite superior del rango (max).
+
+Math.random() * (max - min) + min;: Por último, se suma el valor de min a la expresión para desplazar el rango hacia arriba.
+
+---------------------------------------------------------------
+
+FECHA Y HORA
+
+Aprendamos un nuevo objeto incorporado de JS: Date. Este objeto almacena la fecha, la hora, y brinda métodos para administrarlas.
+
+Por ejemplo, podemos usarlo para almacenar horas de creación o modificación, medir tiempo, o simplemente mostrar en pantalla la fecha actual.
+
+Creación
+Para crear un nuevo objeto Date se lo instancia con new Date() junto con uno de los siguientes argumentos:
+
+new Date()
+Sin argumentos – crea un objeto Date para la fecha y la hora actuales:
+
+let now = new Date();
+alert( now ); // muestra en pantalla la fecha y la hora actuales
+
+Acceso a los componentes de la fecha
+
+Existen métodos que sirven para obtener el año, el mes, y los demás componentes a partir de un objeto de tipo Date:
+
+getFullYear()
+Devuelve el año (4 dígitos)
+
+getMonth()
+Devuelve el mes, de 0 a 11.
+
+getDate()
+Devuelve el día del mes desde 1 a 31. Nótese que el nombre del método no es muy 
+intuitivo.
+
+getHours(), getMinutes(), getSeconds(), getMilliseconds()
+Devuelve los componentes del horario correspondientes.
+
+-----------------------------------------
+
+No getYear(), sino getFullYear()
+
+Algunos motores de JavaScript poseen implementado un método no estándar llamado getYear(). Este método actualmente está obsoleto. A veces devuelve un año de 2 dígitos. Por favor, nunca lo uses. Usa getFullYear() para obtener el año.
