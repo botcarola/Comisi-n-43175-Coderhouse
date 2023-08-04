@@ -135,3 +135,29 @@ console.log(numbers)
 const numbersDescendente = numbers.slice().sort(( a, b ) => b - a)
 
 console.log(numbersDescendente)
+
+// ejemplo orden
+
+// const productos = [
+//     { 
+
+//     },
+//     {
+
+//     },
+//     {
+
+//     },
+//     {
+
+//     },
+
+// ]
+
+// const preguntarQueQuiere = prompt("HOLA BIENVENIDO, PUEDE ELEGIR ENTRE LOS SIGUIENTES PRODUCTOS: REMERA, PANTALÓN, ZAPATILLAS")
+
+
+// const verificarProducto= (preguntarQueQuiere ) => {
+//     if (el usuario eligio remera)
+//     entonces le mando un alerta diciendole que salió x cosa y que tiene envío gratis
+// }

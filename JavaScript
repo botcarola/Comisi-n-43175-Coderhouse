@@ -1491,3 +1491,243 @@ Devuelve los componentes del horario correspondientes.
 No getYear(), sino getFullYear()
 
 Algunos motores de JavaScript poseen implementado un método no estándar llamado getYear(). Este método actualmente está obsoleto. A veces devuelve un año de 2 dígitos. Por favor, nunca lo uses. Usa getFullYear() para obtener el año.
+
+------------------------------------------------------------------------------------
+
+CLASE 10 DOM
+
+Cuando comenzamos haciendo desarrollo web, nuestros primeros pasos están relacionados a HTML (Hypertext markup language) y CSS (Cascade Stylesheet). Desde estos lenguajes estamos habilitados a estructurar el contenido de un sitio y modificar sus estilos por defecto (user agent stylesheet). Sin embargo, esta perspectiva es muy limitante, debido a que estos sitios carecen de dinamismo, es decir, son estáticos.
+
+Al incorporar JavaScript en nuestros proyectos, podemos generar un dinamismo que nos va a permitir crear páginas que ofrecen una experiencia más completa, en donde podemos tener contacto con el usuario, ofrecer accionables que puedan darse dentro del contexto del sitio y cubrir necesidades de negocio.
+
+¿Qué es el DOM?
+
+La sigla DOM (Document Object Model), es la estructura del documento HTML. Una página HTML está formada por múltiples etiquetas HTML, anidadas una dentro de otra, formando un árbol de etiquetas relacionadas entre sí, que se denominan árbol DOM.
+
+En JavaScript, cuando nos referimos al DOM, hacemos referencia a esta estructura de árbol, mediante la cuál podemos acceder a ella y modificar los elementos del HTML desde JavaScript, añadiendo nuevas etiquetas, modificando o eliminando otras, cambiando sus atributos HTML, añadiendo clases, cambiando el contenido del texto, etc.
+
+Al estar controlado por un lenguaje de programación, todas estas tareas se pueden automatizar, incluso indicando que se realicen cuando el usuario haga acciones determinadas, como por ejemplo: pulsar un botón, mover el ratón, hacer click en una parte del documento, etc.
+
+Cuando abrimos una página web en un navegador, el navegador toma el texto HTML y lo parsea. El navegador construye la estructura del modelo de objetos del documento y usa este modelo para “dibujar” la página en la pantalla.
+La representación del documento es uno de los elementos que tiene disponible JavaScript. Esta estructura de dato puede ser modificada. Es como una estructura de datos viva, cuando es modificada, la página es actualizada para reflejar los cambios.
+ESTRUCTURA DEL DOCUMENTO
+
+Se puede imaginar a un documento HTML como un conjunto de cajas anidadas. Etiquetas como <body> y </body>, contiene otras etiquetas, que en el flujo del documento, van a estar conteniendo a otras etiquetas:
+
+<!doctype html>
+<html>
+  <head>
+    <title>My home page</title>
+  </head>
+  <body>
+    <h1>My home page</h1>
+    <p>Hello, I am Marijn and this is my home page.</p>
+    <p>I also wrote a book! Read it
+      <a href="http://eloquentjavascript.net">here</a>.</p>
+  </body>
+</html>
+
+La estructura de datos del navegador representará al documento siguiendo este formato. Para cada una de las cajas, existe un objeto, con el cual podemos interactuar, tanto el elemento en sí como su contenido. Esta representación es llamada Document Object Model o DOM.
+
+El elemento global “document” nos permite el acceso a cada uno de esos objetos. La propiedad “documentElement” hace referencia al <html> representado. 
+Si pensáramos en esta estructura como si fuese un árbol, podríamos establecer un paralelismo con la estructura del DOM. Cada nodo puede hacer referencia a otros nodos, hijos, que a su vez pueden tener sus propios hijos. Esta forma es típica de estructuras anidadas donde los elementos pueden contener subelementos que son similares a ellos mismos.
+
+Llamamos árbol a una estructura de datos cuando tiene una estructura ramificada, no tiene ciclos (un nodo puede no contenerse a sí mismo, directa o indirectamente) y tiene una raíz única y bien definida. En el caso del DOM, document.documentElement sirve como raíz.
+
+Los árboles surgen mucho en informática. Además de representar estructuras recursivas como documentos o programas HTML, a menudo se usan para mantener conjuntos de datos ordenados porque los elementos generalmente se pueden encontrar o insertar de manera más eficiente en un árbol que en una matriz plana.
+
+Un árbol típico tiene diferentes tipos de nodos. El árbol de sintaxis del lenguaje Egg tenía identificadores, valores y nodos de aplicación. Los nodos de aplicación pueden tener hijos, mientras que los identificadores y valores son hojas o nodos sin hijos.
+
+Lo mismo ocurre con el DOM. Los nodos de elementos, que representan etiquetas HTML, determinan la estructura del documento. Estos pueden tener nodos secundarios. Un ejemplo de tal nodo es document.body. Algunos de estos elementos secundarios pueden ser nodos hoja, como fragmentos de texto o nodos de comentarios.
+
+Cada objeto de nodo DOM tiene una propiedad nodeType, que contiene un código (número) que identifica el tipo de nodo. Los elementos tienen el código 1, que también se define como la propiedad constante Node.ELEMENT_NODE. Los nodos de texto, que representan una sección de texto en el documento, obtienen el código 3 (Node.TEXT_NODE). Los comentarios tienen el código 8 (Node.COMMENT_NODE).
+
+----------------------------------------------------------------------------
+
+CLASE 11: EVENTOS
+
+Hay situaciones en las que necesitamos realizar una determinada acción cuando ocurra un determinado caso. En estas situaciones, no sabemos exactamente cuando tenemos que activar nuestra funcionalidad, ya que no podemos predecir cuando el usuario de nuestra página realizará la acción necesaria (y podrá ser diferente en cada situación).
+
+En estas situaciones es cuando entran en juego los eventos.
+
+¿QUÉ ES UN EVENTO?
+
+En Javascript existe un concepto llamado evento, que no es más que una notificación de que alguna característica interesante acaba de ocurrir, generalmente relacionada con el usuario que navega por la página.
+
+Dichas características pueden ser muy variadas:
+
+- Click de ratón del usuario sobre un elemento de la página
+- Pulsación de una tecla específica del teclado
+- Reproducción de un archivo de audio/video
+- Scroll de ratón sobre un elemento de la página
+- El usuario ha activado la opción «Imprimir página»
+
+Como desarrolladores, nuestro objetivo es preparar nuestro código para que cuando ocurra un determinado evento, se lleve a cabo una funcionalidad asociada. De esta forma, podemos preparar nuestra página o aplicación para que cuando ocurran ciertos eventos (que no podemos predecir de otra forma), reaccionen a ellos.
+
+MANEJADORES DE EVENTOS
+
+Los navegadores nos permiten registrar
+funciones como manejadores (handler) para eventos específicos.
+
+EJEMPLO
+
+<p>Da clic en este documento para activar el manejador.</p>
+
+<script>
+window.addEventListener("click", () => {
+console.log("¿Tocaste?");
+});
+</script>
+
+La vinculación window se refiere a un objeto integrado proporcionado por
+el navegador. Este representa la ventana del navegador que contiene el documento. Llamando a su método addEventListener se registra el segundo argumento que se llamará siempre que ocurra el evento descrito por su primer argumento.
+
+EVENTOS Y NODOS DOM
+
+Cada manejador de eventos del navegador es registrado dentro de un contexto.
+En el ejemplo anterior llamamos a addEventListener en el objeto window para
+registrar un manejador para toda la ventana. Este método puede también
+ser encontrado en elementos DOM y en algunos otros tipos de objetos. Los
+controladores de eventos son llamados únicamente cuando el evento ocurra en
+el contexto del objeto en que están registrados.
+
+<button>Presióname</button>
+<p>No hay manejadores aquí.</p>
+<script>
+let boton = document.querySelector("button");
+boton.addEventListener("click", () => {
+console.log("Botón presionado.");
+});
+</script>
+
+Este ejemplo adjunta un manejador al nodo del botón. Los clics sobre el
+botón hacen que se ejecute ese manejador, pero los clics sobre el resto del
+documento no.
+Dar a un nodo un atributo onclick tiene un efecto similar. Esto funciona
+para la mayoría de tipos de eventos—se puede adjuntar un manejador a través
+del atributo cuyo nombre es el nombre del evento con on en frente de este.
+Pero un nodo puede tener únicamente un atributo onclick, por lo que se
+puede registrar únicamente un manejador por nodo de esa manera. El método
+addEventListener permite agregar cualquier número de manejadores siendo
+seguro agregar manejadores incluso si ya hay otro manejador en el elemento.
+
+
+OBJETOS DE EVENTO
+
+Aunque lo hemos ignorado hasta ahora, las funciones del manejador de eventos
+reciben un argumento: el objeto de evento. Este objeto contiene información
+adicional acerca del evento. Por ejemplo, si queremos saber cuál botón del
+mouse fue presionado, se puede ver la propiedad button del objeto de evento.
+
+<button>Haz clic en mí de la forma que quieras</button>
+<script>
+let boton = document.querySelector("button");
+boton.addEventListener("mousedown", evento => {
+if (evento.button == 0) {
+console.log("Botón izquierdo");
+} else if (evento.button == 1) {
+console.log("Botón central");
+} else if (evento.button == 2) {
+console.log("Botón derecho");
+}
+});
+</script>
+
+La información almacenada en un objeto de evento es diferente por cada
+tipo de evento. Se discutirán los distintos tipos de eventos más adelante en
+el capítulo. La propiedad type del objeto siempre contiene una cadena que
+identifica al evento (como "click" o "mousedown")
+
+PROPAGACIÓN
+
+Para la mayoría de tipos de eventos, los manejadores registrados en nodos con
+hijos también recibirán los eventos que sucedan en los hijos. Si se hace clic a
+un botón dentro de un párrafo, los manejadores de eventos del párrafo también
+verán el evento clic.
+Pero si tanto el párrafo como el botón tienen un manejador, el manejador
+más específico—el del botón—es el primero en lanzarse. Se dice que el evento
+se propaga hacia afuera, desde el nodo donde este sucedió hasta el nodo padre
+del nodo y hasta la raíz del documento. Finalmente, después de que todos
+los manejadores registrados en un nodo específico hayan tenido su turno, los
+manejadores registrados en general ventana tienen la oportunidad de responder
+al evento.
+En cualquier momento, un manejador de eventos puede llamar al método
+stopPropagation en el objeto de evento para evitar que los manejadores que
+se encuentran más arriba reciban el evento. Esto puede ser útil cuando, por
+ejemplo, si tienes un botón dentro de otro elemento en el que se puede hacer
+clic y que no se quiere que los clics sobre el botón activen el comportamiento
+de clic del elemento exterior.
+El siguiente ejemplo registra manejadores "mousedown" tanto en un botón
+como el párrafo que lo rodea. Cuando se hace clic con el botón derecho del
+mouse, el manejador del botón llama a stopPropagation, lo que evitará que
+se ejecute el manejador del párrafo. Cuando se hace clic en el botón con otro
+botón del mouse, ambos manejadores se ejecutarán.
+
+<p>Un párrafo con un <button>botón</button>.</p>
+<script>
+let parrafo = document.querySelector("p");
+let boton = document.querySelector("button");
+parrafo.addEventListener("mousedown", () => {
+console.log("Manejador del párrafo.");
+});
+boton.addEventListener("mousedown", evento => {
+console.log("Manejador del botón.");
+if (evento.button == 2) evento.stopPropagation();
+});
+</script>
+
+La mayoría de objetos de eventos tienen una propiedad target que se refiere
+al nodo donde se originaron. Se puede usar esta propiedad para asegurar de
+que no se está manejando accidentalmente algo que se propagó desde un nodo
+que no se desea manejar.
+
+También es posible utilizar la propiedad target para lanzar una red amplia
+para un evento específico. Por ejemplo, si tienes un nodo que contiene una gran
+cantidad de botones, puede ser más conveniente el registrar un manejador en un
+solo clic en el nodo externo y hacer que use la propiedad target para averiguar
+si se hizo clic en un botón, en lugar de registrar manejadores individuales en
+todos los botones.
+
+<button>A</button>
+<button>B</button>
+<button>C</button>
+<script>
+document.body.addEventListener("click", evento => {
+if (evento.target.nodeName == "BUTTON") {
+console.log("Presionado", evento.target.textContent);
+}
+});
+</script>
+
+ACCIONES POR DEFECTO
+
+La mayoría de eventos tienen una acción por defecto asociada a ellos. Si haces
+clic en un enlace, se te dirigirá al destino del enlace. Si presionas la flecha hacia
+abajo, el navegador desplazará la página hacia abajo. Si das clic derecho, se
+obtendrá un menú contextual. Y así.
+
+Para la mayoría de los tipos de eventos, los manejadores de eventos de
+JavaScript se llamarán antes de que el comportamiento por defecto se produzca. Si el manejador no quiere que suceda este comportamiento por defecto,
+normalmente porque ya se ha encargado de manejar el evento, se puede llamar
+al método preventDefault en el objeto de evento.
+
+Esto puede ser utilizado para implementar un atajo de teclado propio o
+menú contextual. Esto también puede ser utilizado para interferir de forma
+desagradable el comportamiento que los usuarios esperan. Por ejemplo, aquí
+hay un enlace que no se puede seguir:
+
+<a href="https://developer.mozilla.org/">MDN</a>
+<script>
+let enlace = document.querySelector("a");
+enlace.addEventListener("click", evento => {
+console.log("Nope.");
+evento.preventDefault();
+});
+</script>
+
+Trata de no hacer tales cosas a menos que tengas una buena razón para
+hacerlo. Será desagradable para las personas que usan tu página cuando el
+comportamiento esperado no funcione.
+Dependiendo del navegador, algunos eventos no pueden ser interceptados en
+lo absoluto. En Chrome, por ejemplo, el atajo de teclado para cerrar la pestaña
+actual (control-W o command-W) no se puede manejar con JavaScript.
