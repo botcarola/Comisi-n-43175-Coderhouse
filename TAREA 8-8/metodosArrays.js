@@ -1,6 +1,6 @@
 // **Actividad 1: Creación del Array de Objetos**
 // 1. Crea un archivo HTML, JS y CSS básicos para tu proyecto.
-// 2. Define un array llamado `productos` que contendrá objetos con las siguientes propiedades: `id`, `producto`, `categoria`, `precio`, `cantidad`, `envioGratis` y `colores`.
+// 2. Define un array llamado `productos` que contendrá objetos con las siguientes propiedades: `id`, `producto`, `categoria`, `precio`, `cantidad`, `envioGratis` y `colores` (es un array de los colores de los productos).
 // 3. Agrega al menos tres objetos al array, cada uno representando un producto diferente con sus respectivas propiedades.
 // 4. Imprime el array de productos en la consola del navegador para verificar que se hayan creado correctamente.
 
@@ -25,6 +25,6 @@
 // 2. Implementa una función llamada `buscarProducto` que tome como parámetro una palabra clave y muestre los productos que coincidan con esa palabra en su nombre o categoría.
 
 // **Actividad 7: Extra - Colores Disponibles**
-// 1. Implementa la propiedad `colores` en tus objetos de productos.
+// 1. Realiza una función que recorra el array  de productos con el método forEach. 
 // 2. Muestra los colores disponibles para cada producto en tu página, ya sea como una lista o utilizando elementos visuales como círculos de colores.
 
