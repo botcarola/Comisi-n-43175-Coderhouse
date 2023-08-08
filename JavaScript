@@ -1731,3 +1731,49 @@ comportamiento esperado no funcione.
 Dependiendo del navegador, algunos eventos no pueden ser interceptados en
 lo absoluto. En Chrome, por ejemplo, el atajo de teclado para cerrar la pestaña
 actual (control-W o command-W) no se puede manejar con JavaScript.
+
+_______________________________________________________________________________
+
+Clase 11: STORAGE & JSON
+
+¿Qué son las cookies? ¿Cómo se usan las cookies desde JavaScript?
+
+Las cookies son pequeños fragmentos de datos que un servidor web puede enviar al navegador del usuario y que se almacenan en el dispositivo del usuario. Estos datos se envían de vuelta al servidor en cada solicitud subsiguiente, lo que permite que el servidor identifique y realice un seguimiento del usuario. Las cookies son ampliamente utilizadas en la web para diversas funcionalidades, como mantener sesiones de usuario, almacenar preferencias, realizar análisis y rastrear el comportamiento del usuario.
+
+Desde el punto de vista de JavaScript, se puede acceder y manipular cookies utilizando el objeto `document.cookie`. Este objeto proporciona una manera de establecer, obtener y eliminar cookies. Las cookies se almacenan como una cadena de texto con formato clave-valor, donde cada par clave-valor representa una cookie.
+
+Aquí hay un ejemplo simple de cómo usar cookies desde JavaScript:
+
+```javascript
+// Establecer una cookie
+document.cookie = "usuario=Juan; expires=Sat, 08 Aug 2023 23:59:59 UTC; path=/";
+
+// Obtener el valor de una cookie específica
+const usuarioCookie = document.cookie.split('; ').find(cookie => cookie.startsWith('usuario='));
+const usuario = usuarioCookie ? usuarioCookie.split('=')[1] : null;
+console.log(usuario); // Imprimirá "Juan"
+
+// Eliminar una cookie (estableciendo una fecha de vencimiento en el pasado)
+document.cookie = "usuario=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+```
+
+En este ejemplo:
+
+- Primero, se establece una cookie llamada "usuario" con el valor "Juan" y una fecha de vencimiento futura.
+- Luego, se obtiene el valor de la cookie "usuario" separando la cadena `document.cookie` y buscando el valor correspondiente.
+- Finalmente, se elimina la cookie estableciendo una fecha de vencimiento en el pasado.
+
+Es importante tener en cuenta algunas consideraciones al trabajar con cookies:
+
+1. **Seguridad y Privacidad:** Las cookies pueden ser utilizadas para rastrear a los usuarios y almacenar información sensible. Por lo tanto, es crucial manejar las cookies con precaución y cumplir con las regulaciones de privacidad, como el Reglamento General de Protección de Datos (GDPR) en la Unión Europea.
+
+2. **Tamaño Limitado:** Las cookies tienen un tamaño limitado (generalmente alrededor de 4KB). No es recomendable almacenar grandes cantidades de datos en cookies.
+
+3. **Acceso Limitado:** Las cookies están sujetas a políticas de mismo origen (same-origin policy) y solo se pueden acceder desde el mismo dominio que las estableció.
+
+4. **Diferentes Navegadores:** La manipulación de cookies puede variar ligeramente entre diferentes navegadores, por lo que es importante realizar pruebas cruzadas para garantizar la compatibilidad.
+
+En muchos casos, especialmente cuando se necesita almacenar una cantidad más grande de datos o información más compleja, es posible que las cookies no sean la mejor opción y se pueda considerar el uso de otras formas de almacenamiento, como el almacenamiento web (`LocalStorage` o `SessionStorage`) o incluso la comunicación con un servidor.
+
+¿En qué situación se prefieren las cookies y en cuáles el storage?
+
