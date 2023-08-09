@@ -1736,6 +1736,24 @@ _______________________________________________________________________________
 
 Clase 11: STORAGE & JSON
 
+A finales de la década de 1990, muchos sitios web se caracterizaban por ser delanteras HTML hacia bases de datos. Los sitios web modernos presumen de manejar conjuntos de datos del tamaño de petabytes, lo cual supone un crecimiento en órdenes de magnitud superior comparado con la década anterior. No hay indicios de este almacenamiento de datos centrado en la red disminuya, teniendo en consideración la "computación en la nube" y el "software como servicio".
+
+Esto no significa los desarrolladores web quieran mantenerlo todo en una base de datos dirigida por un servidor web. Existen muchos beneficios en lo referente a la descarga del almacenamiento de datos hacia el navegador; desde el ancho de banda hasta el rendimiento y los costes de almacenamiento. La cookie HTTP ha sido siempre el caballo de batalla del almacenamiento en el navegador. Sin embargo las cookies tienen límites de cantidad (20 cookies por dominio), tamaño (4 KB por cookie) y seguridad (un atributo de ruta inútil 2 ); los cuales han sido acordados por los fabricantes de navegadores en principio y no por estándar.
+
+El propósito del Almacenamiento Web (Web Storage) es ofrecer un mecanismo para los desarrolladores web puedan almacenar grandes cantidades de datos en el navegador, utilizando una API estándar para todos los navegadores. Las principales características de Web Storage atestiguan su ascendencia en la cookie HTTP: los datos se almacenan como pares clave/valor, y los objetos de Web Storage pueden marcarse como sessionStorage o localStorage (similar a las cookies de sesión y persistentes).
+
+Las claves y los valores de un objeto de almacenamiento son siempre cadenas de JavaScript. Un objeto de almacenamiento de sesión está vinculado hacia un contexto de navegación. Por ejemplo, dos pestañas diferentes del navegador tendrán objetos sessionStorage únicos. Los cambios en una no afectarán a la otra. El contenido de un objeto localStorage será accesible a todas las pestañas del navegador; la modificación de un par clave/valor de una pestaña afectará al almacenamiento de cada pestaña. En todos los casos el acceso está restringido por la Política del Mismo Origen.
+
+Un aspecto importante de la seguridad del almacenamiento web es los datos son visibles y modificables por el usuario.
+
+El siguiente código demuestra un patrón común para enumerar las claves de un objeto de almacenamiento a través de un bucle.
+
+let clave;
+for (let i = 0; i < localStorage.length; i++){
+key = localStorage.key(i);
+console.log(localStorage.getItem(key));
+}
+
 ¿Qué son las cookies? ¿Cómo se usan las cookies desde JavaScript?
 
 Las cookies son pequeños fragmentos de datos que un servidor web puede enviar al navegador del usuario y que se almacenan en el dispositivo del usuario. Estos datos se envían de vuelta al servidor en cada solicitud subsiguiente, lo que permite que el servidor identifique y realice un seguimiento del usuario. Las cookies son ampliamente utilizadas en la web para diversas funcionalidades, como mantener sesiones de usuario, almacenar preferencias, realizar análisis y rastrear el comportamiento del usuario.
@@ -1777,3 +1795,155 @@ En muchos casos, especialmente cuando se necesita almacenar una cantidad más gr
 
 ¿En qué situación se prefieren las cookies y en cuáles el storage?
 
+Tanto las cookies como el almacenamiento web (`LocalStorage` y `SessionStorage`) tienen sus propias ventajas y casos de uso específicos en el desarrollo web. La elección entre usar cookies o almacenamiento web dependerá de las necesidades particulares de tu aplicación. Aquí hay algunas consideraciones sobre cuándo es preferible utilizar cookies y cuándo es más adecuado utilizar el almacenamiento web:
+
+**Cookies:**
+
+1. **Gestión de Sesiones:** Las cookies son ideales para administrar sesiones de usuario. Puedes usar cookies para mantener al usuario autenticado a lo largo de sus interacciones en el sitio web.
+
+2. **Comunicación con el Servidor:** Las cookies se envían automáticamente con cada solicitud al servidor, lo que las hace útiles para enviar datos al servidor en cada interacción.
+
+3. **Seguimiento del Usuario:** Si necesitas rastrear el comportamiento del usuario en diferentes visitas o sesiones, las cookies son una opción adecuada.
+
+4. **Compatibilidad con Navegadores Antiguos:** Las cookies son ampliamente compatibles con navegadores antiguos y no dependen tanto de la versión del navegador.
+
+**Almacenamiento Web (`LocalStorage` y `SessionStorage`):**
+
+1. **Almacenamiento Local:** El almacenamiento web es ideal cuando necesitas almacenar datos en el navegador del usuario para su uso posterior, pero no es necesario enviarlos al servidor en cada interacción.
+
+2. **Capacidad Mayor de Almacenamiento:** El almacenamiento web puede manejar más datos que las cookies (generalmente alrededor de 5-10 MB en comparación con los 4KB típicos de las cookies).
+
+3. **Persistencia de Datos:** Si deseas almacenar datos de manera persistente para que estén disponibles incluso después de cerrar el navegador, el almacenamiento web es la elección adecuada.
+
+4. **Mejor Control de Datos:** El almacenamiento web ofrece un mayor control sobre los datos, ya que no se envían automáticamente con cada solicitud al servidor y no están sujetos a las restricciones de mismo origen de las cookies.
+
+En resumen, las cookies son especialmente útiles para administrar sesiones de usuario, realizar seguimiento y comunicación con el servidor, mientras que el almacenamiento web es más adecuado para el almacenamiento local y persistente de datos en el navegador del usuario. En muchos casos, una combinación de ambas soluciones puede ser beneficiosa para lograr los objetivos deseados en una aplicación web.
+
+EL OBJETO STORAGE, LOCALSTORAGE Y SESSIONSTORAGE
+
+El objeto `Storage` y la API de almacenamiento web son conceptos relacionados en el mundo de la programación web, que permiten a los desarrolladores almacenar datos de manera persistente en el navegador del usuario. Esto es útil para guardar información localmente y acceder a ella en futuras sesiones sin necesidad de enviarla constantemente al servidor.
+
+**Objeto Storage:**
+El objeto `Storage` es una interfaz en JavaScript que proporciona una forma sencilla de almacenar pares clave-valor en el navegador web. Hay dos tipos de objetos `Storage`: `localStorage` y `sessionStorage`.
+
+1. **localStorage:** Los datos almacenados en `localStorage` persisten incluso después de cerrar y volver a abrir el navegador. Estos datos son accesibles para la misma página web en futuras sesiones.
+
+2. **sessionStorage:** Los datos almacenados en `sessionStorage` solo están disponibles durante la sesión actual del navegador. Cuando se cierra la pestaña o ventana del navegador, los datos almacenados en `sessionStorage` se eliminan.
+
+**API de Almacenamiento Web:**
+La API de almacenamiento web es una característica de JavaScript que proporciona métodos para interactuar con el objeto `Storage`. Permite a los desarrolladores guardar, recuperar y eliminar datos de manera sencilla en el navegador del usuario. La API incluye los siguientes métodos básicos:
+
+1. `setItem(key, value)`: Almacena un valor asociado a una clave en el objeto `Storage`.
+
+2. `getItem(key)`: Recupera el valor asociado a una clave específica.
+
+3. `removeItem(key)`: Elimina el valor asociado a una clave.
+
+4. `clear()`: Elimina todos los valores almacenados en el objeto `Storage`.
+
+**Ejemplo de uso de la API de Almacenamiento Web:**
+Supongamos que deseamos crear un contador de visitas en una página web utilizando `localStorage`. Aquí hay un ejemplo de cómo podríamos hacerlo:
+
+```javascript
+// Incrementar el contador de visitas
+function incrementCounter() {
+  // Obtener el valor actual del contador (si existe)
+  let currentCount = localStorage.getItem('visitCount') || 0;
+
+  // Incrementar el contador
+  currentCount++;
+
+  // Almacenar el nuevo valor del contador en localStorage
+  localStorage.setItem('visitCount', currentCount);
+
+  // Mostrar el contador en la página
+  document.getElementById('counter').textContent = `Visitas: ${currentCount}`;
+}
+
+// Llamar a la función para incrementar el contador al cargar la página
+window.onload = function () {
+  incrementCounter();
+};
+```
+
+En este ejemplo, cada vez que el usuario carga la página, la función `incrementCounter` verifica si ya existe un contador almacenado en `localStorage`. Si existe, incrementa su valor y lo actualiza. Si no existe, se crea un nuevo contador con valor 1. Luego, el valor actualizado se muestra en la página.
+
+Recuerda que `localStorage` tiene limitaciones en cuanto a la cantidad de datos que se pueden almacenar (generalmente alrededor de 5-10 MB por dominio) y que no es adecuado para almacenar información sensible o confidencial.
+
+JSON
+
+JSON (JavaScript Object Notation) es un formato de intercambio de datos ligero y fácil de leer que se utiliza para representar estructuras de datos y objetos en texto plano. Es ampliamente utilizado en la programación web y en la comunicación entre sistemas para transmitir y almacenar información de manera eficiente y legible tanto para humanos como para máquinas.
+
+Características clave de JSON:
+
+1. **Sintaxis Sencilla:** JSON utiliza una sintaxis simple y legible que consiste en pares clave-valor, arrays (listas ordenadas) y objetos (colecciones no ordenadas de pares clave-valor).
+
+2. **Formato de Texto Plano:** Los datos JSON se representan en formato de texto, lo que facilita la lectura y la depuración.
+
+3. **Independiente del Lenguaje:** JSON es independiente del lenguaje de programación, lo que significa que puede ser utilizado y comprendido por múltiples lenguajes.
+
+4. **Facilita la Comunicación:** JSON se utiliza comúnmente en la comunicación entre el cliente y el servidor, así como en la persistencia de datos.
+
+**Usos de JSON:**
+
+1. **Intercambio de Datos:** JSON se utiliza para transmitir datos entre diferentes aplicaciones y sistemas, ya sea a través de APIs, servicios web o cualquier otra forma de comunicación.
+
+2. **Persistencia de Datos:** JSON se utiliza para almacenar datos en archivos o bases de datos en formato de texto, lo que facilita la lectura y escritura.
+
+3. **Configuración y Metadatos:** JSON se utiliza para representar configuraciones, opciones y metadatos en aplicaciones.
+
+4. **Serialización y Deserialización:** JSON se utiliza para serializar (convertir a una cadena JSON) y deserializar (convertir desde una cadena JSON) objetos, lo que facilita su almacenamiento y transmisión.
+
+**Rol en la Relación Cliente-Servidor:**
+
+En la relación cliente-servidor, JSON juega un papel crucial como un formato comúnmente aceptado para la comunicación de datos entre el cliente (generalmente un navegador web o una aplicación) y el servidor (que aloja la aplicación o el servicio). Aquí están algunas formas en las que JSON se utiliza en esta relación:
+
+1. **Respuestas de Servidor:** Cuando el cliente realiza una solicitud al servidor, la respuesta del servidor a menudo se devuelve en formato JSON. Esta respuesta puede contener datos, mensajes de error, resultados de consultas, etc.
+
+2. **Solicitudes al Servidor:** Al enviar datos al servidor, como formularios o solicitudes de API, el cliente puede codificar los datos en formato JSON antes de enviarlos.
+
+3. **Configuración y Personalización:** JSON se utiliza para enviar configuraciones o preferencias personalizadas desde el cliente al servidor, lo que permite adaptar la experiencia del usuario.
+
+4. **APIs y Servicios Web:** Muchas APIs y servicios web utilizan JSON para definir la estructura de las solicitudes y respuestas, lo que permite una comunicación eficiente y bien estructurada entre el cliente y el servidor.
+
+En JavaScript, trabajar con JSON implica la manipulación y transformación de datos en formato JSON. Para lograrlo, existen varios métodos y funciones proporcionados por el lenguaje y por el propio formato JSON. Aquí te presento algunos de los métodos y funciones más comunes para trabajar con JSON en JavaScript:
+
+1. **`JSON.parse()`**: Este método se utiliza para analizar una cadena JSON y convertirla en un objeto JavaScript. Recibe como argumento una cadena JSON y devuelve un objeto JavaScript correspondiente. Por ejemplo:
+
+```javascript
+const jsonString = '{"nombre": "Juan", "edad": 30}';
+const objeto = JSON.parse(jsonString);
+console.log(objeto.nombre); // Salida: "Juan"
+```
+
+2. **`JSON.stringify()`**: Este método convierte un objeto JavaScript en una cadena JSON. Puedes usarlo para serializar un objeto antes de enviarlo a un servidor o almacenarlo. Por ejemplo:
+
+```javascript
+const objeto = { nombre: "María", edad: 25 };
+const jsonString = JSON.stringify(objeto);
+console.log(jsonString); // Salida: '{"nombre":"María","edad":25}'
+```
+
+3. **`JSON.stringify()` con espaciado**: Puedes proporcionar un segundo argumento a `JSON.stringify()` para agregar un espaciado (indentación) a la cadena JSON generada, lo que facilita la lectura. Por ejemplo:
+
+```javascript
+const objeto = { nombre: "Pedro", edad: 28 };
+const jsonString = JSON.stringify(objeto, null, 2);
+console.log(jsonString);
+// Salida:
+// {
+//   "nombre": "Pedro",
+//   "edad": 28
+// }
+```
+
+4. **Manejo de Errores**: Tanto `JSON.parse()` como `JSON.stringify()` pueden generar errores si los datos no son válidos. Debes envolver su uso en bloques try-catch para manejar estos errores adecuadamente.
+
+```javascript
+try {
+  const jsonString = '{"nombre": "Ana", "edad":}';
+  const objeto = JSON.parse(jsonString);
+} catch (error) {
+  console.error('Error al analizar JSON:', error);
+}
+```
