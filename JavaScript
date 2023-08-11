@@ -1947,3 +1947,15 @@ try {
   console.error('Error al analizar JSON:', error);
 }
 ```
+_____________________________________________________________________________________
+
+Clase 12: Sugar Syntax
+
+La "sugar syntax" (sintaxis azucarada) de Peter Landin se refiere a la idea de utilizar una sintaxis más legible o expresiva en un lenguaje de programación, en lugar de depender únicamente de la sintaxis más formal o básica del lenguaje. Esta noción se asoció principalmente con Peter Landin, un informático británico que realizó contribuciones significativas en el campo de la programación y la lingüística.
+
+Landin propuso que los lenguajes de programación deberían permitir a los programadores expresar sus ideas de manera más clara y concisa, en lugar de obligarlos a utilizar una sintaxis más compleja y formal. En lugar de basarse únicamente en las construcciones sintácticas primitivas del lenguaje, como las instrucciones y las estructuras de control estándar, se podrían introducir formas de escribir código que se sintieran más naturales y cercanas al lenguaje humano.
+
+Un ejemplo clásico de "sugar syntax" es el uso de bucles "for each" en muchos lenguajes modernos en lugar de bucles "for" tradicionales, lo que hace que el código sea más claro y legible cuando se trabaja con colecciones de datos.
+
+Esencialmente, la idea detrás de la "sugar syntax" es mejorar la productividad del programador y hacer que el código sea más fácil de entender y mantener, al proporcionar construcciones de lenguaje más expresivas y menos verbosas. Sin embargo, es importante encontrar un equilibrio para no sobrecargar el lenguaje con demasiadas construcciones sintácticas adicionales, ya que esto podría dificultar la comprensión de los programas por parte de otros desarrolladores.
+
