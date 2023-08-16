@@ -39,3 +39,127 @@
 
 // 10. **Responsive Design:**
 //     - Asegúrate de que las tarjetas de usuario y la página en general se vean bien en dispositivos móviles y pantallas de diferentes tamaños.
+
+// 1) ALMACENÉ EN UNA VARIABLE EL NODO DE HTML QUE CONTENDRÁ A TODOS MIS NODOS GENERADOS DESDE JS
+
+const table = document.querySelector("#tabla-users")
+
+// 2) HACER LAS TARJETAS
+
+const cards = array => {
+    const data =  array.reduce(( acc, element ) => {
+    return acc + `
+        <tbody class="body-tabla">
+            <tr>
+                <td>
+                    ${element.first_name} ${element.last_name}
+                </td> 
+                <td>
+                    ${element.email} 
+                </td>   
+                <td>
+                    ${element.gender || "None"}
+                </td>  
+                <td>
+                    ${element.app_name} 
+                </td>  
+                <td>
+                    ${element.country || "None"} 
+                </td>  
+                <td>
+                    ${element.phone} 
+                </td>  
+                <td>
+                    ${element.street_address}
+                </td>
+            </tr>
+        </tbody>
+    `
+}, `
+    <thead>
+        <tr>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Gender
+            </th>
+            <th>
+                Nickname
+            </th>
+            <th>
+                Country
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Street address
+            </th>
+        </tr>
+    </thead>
+`)
+
+table.innerHTML = data
+}
+
+cards(mockdata)
+
+
+// llamar al selector para escuchar los cambios de los géneros
+
+const selectorGenero = document.querySelector("#select-genero")
+
+console.log(selectorGenero)
+
+const filtrarPorGenero = ( genero, array ) => {
+    return array.filter( element => {
+        return element.gender && genero === element.gender 
+    })
+}
+
+const filtrarGeneroPorNulo = ( array ) => {
+    return array.filter( element => {       
+        return element.gender === null
+    })
+}
+
+selectorGenero.addEventListener("change", (e) => {
+    console.log(e.target.value) // me muestra el valor del input
+
+    if ( e.target.value === "all" ) {
+        cards(mockdata)
+    } else if ( e.target.value === "null" ) {
+        cards(filtrarGeneroPorNulo(mockdata))
+    } else {
+        cards(filtrarPorGenero(e.target.value, mockdata))  
+    }
+})
+
+// BÚSQUEDA POR NOMBRE
+
+const formBusquedaNombre = document.querySelector("#form-busqueda-nombre")
+const inputBusquedaNombre = document.querySelector("#input-nombre")
+
+const buscarUsuario = ( array, busqueda ) => {
+    return array.find( persona => {
+        const concatenarNombres = `${persona.first_name} ${persona.last_name}`
+        return concatenarNombres === busqueda
+    })
+}
+
+formBusquedaNombre.onsubmit = (e) => {
+    e.preventDefault()
+    
+    if ( inputBusquedaNombre.value !== "" && inputBusquedaNombre.value !== null && inputBusquedaNombre.value !== undefined) {
+        const persona = buscarUsuario(mockdata, inputBusquedaNombre.value)
+
+        if ( persona !== undefined ) {
+
+            alert(`La búsqueda de ${persona.first_name} ${persona.last_name} fue exitoso y trajo los siguientes datos: ${persona.street_address}`)
+        }
+    }    
+}

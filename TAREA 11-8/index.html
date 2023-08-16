@@ -6,7 +6,28 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="container"></div>
+    <form>
+        <select id="select-genero">
+            <option value="all" selected>All</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Genderqueer">Genderqueer</option>
+            <option value="Bigender">Bigender</option>
+            <option value="null">None</option>
+        </select>        
+    </form>
+    <form id="form-busqueda-nombre">
+        <label>
+            <input placeholder="Nombre" type="text" id="input-nombre">
+        </label>
+        <label>
+            <input type="submit">
+        </label>
+    </form>
+    <table id="tabla-users" class="tabla-usuarios">
+        
+    </table>
+    <script src="data.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
