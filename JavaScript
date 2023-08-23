@@ -1959,3 +1959,183 @@ Un ejemplo clásico de "sugar syntax" es el uso de bucles "for each" en muchos l
 
 Esencialmente, la idea detrás de la "sugar syntax" es mejorar la productividad del programador y hacer que el código sea más fácil de entender y mantener, al proporcionar construcciones de lenguaje más expresivas y menos verbosas. Sin embargo, es importante encontrar un equilibrio para no sobrecargar el lenguaje con demasiadas construcciones sintácticas adicionales, ya que esto podría dificultar la comprensión de los programas por parte de otros desarrolladores.
 
+______________________________________________________________________________________
+
+CLASE 15: ASINCRONISMO Y PROMESAS
+
+La programación síncrona se refiere a un estilo de programación en el que las instrucciones se ejecutan una tras otra en secuencia, de manera que cada operación espera a que la anterior se complete antes de comenzar. En otras palabras, en la programación síncrona, el flujo de ejecución está BLOQUEADO mientras se espera a que una tarea se complete antes de avanzar a la siguiente.
+
+En el contexto de JavaScript, la programación síncrona significa que el código se ejecuta línea por línea, y cada línea de código se espera a que la operación anterior se complete antes de ejecutarse. 
+
+Sin embargo, este enfoque puede ser problemático en situaciones donde se requiere la realización de tareas que llevan tiempo (como solicitudes a servidores externos o procesamiento intensivo) ya que puede causar bloqueos y ralentizar la aplicación.
+
+EJEMPLO SÍNCRONO
+
+console.log("Inicio");
+
+function procesoLento() {
+  for (let i = 0; i < 1000000000; i++) {}
+  console.log("Proceso Lento Terminado");
+}
+
+function procesoRapido() {
+  console.log("Proceso Rápido Terminado");
+}
+
+procesoLento();
+procesoRapido();
+
+console.log("Fin");
+
+
+En este ejemplo, el código se ejecutará de manera síncrona. La función procesoLento toma tiempo en ejecutarse debido al bucle for, por lo que el proceso rápido no se iniciará hasta que el proceso lento termine. Esto puede causar un retraso en la ejecución general del programa.
+
+console.log("Inicio");
+
+function procesoAsincrono() {
+  setTimeout(() => {
+    console.log("Proceso Asíncrono Terminado");
+  }, 2000); // Simulando una tarea que toma 2 segundos
+}
+
+function procesoSincrono() {
+  console.log("Proceso Síncrono Terminado");
+}
+
+procesoAsincrono();
+procesoSincrono();
+
+console.log("Fin");
+
+
+En este ejemplo, la función procesoAsincrono utiliza setTimeout para simular una tarea que toma 2 segundos. Mientras tanto, la función procesoSincrono es síncrona. Debido a la naturaleza asincrónica de setTimeout, la función procesoSincrono no espera a que procesoAsincrono termine antes de ejecutarse. Por lo tanto, "Proceso Síncrono Terminado" se imprimirá antes de "Proceso Asíncrono Terminado", a pesar de que procesoAsincrono se inició primero.
+
+¿Qué es la programación asíncrona?
+
+La programación asíncrona se refiere a un estilo de programación en el que las operaciones y tareas se ejecutan de manera independiente y no bloqueante del flujo de ejecución. En contraste con la programación síncrona, donde cada operación espera a que la anterior termine antes de comenzar, la programación asíncrona permite que múltiples tareas se ejecuten en paralelo, mejorando la eficiencia y la capacidad de respuesta de las aplicaciones.
+
+En la programación asíncrona, en lugar de detener el flujo de ejecución para esperar a que una tarea termine, se inician tareas en segundo plano y se continúa con la ejecución del código principal. Cuando una tarea asíncrona termina, se activa una notificación (como un callback, una promesa resulesta o una función async/await) para manejar los resultados o realizar acciones adicionales.
+
+El asincronismo es especialmente útil cuando se trabaja con operaciones que pueden llevar tiempo, como solicitudes a servidores, lectura/escritura de archivos, animaciones en interfaces de usuario o procesamiento intensivo. Al permitir que estas tareas se realicen sin bloquear el flujo de ejecución principal, se logra una experiencia de usuario más fluida y una mayor eficiencia en la utilización de recursos.
+
+La programación asíncrona es una técnica que permite ejecutar tareas en segundo plano de manera no bloqueante, mejorando la capacidad de respuesta y eficiencia de las aplicaciones al permitir que múltiples operaciones se realicen en paralelo. Los mecanismos como callbacks, promesas y async/await en JavaScript son herramientas esenciales para implementar la programación asíncrona de manera efectiva.
+
+¿Cuáles son las herramientas asincrónicas de JavaScript?
+
+El asincronismo es esencial en situaciones donde se requiere interactuar con recursos externos, como servidores web, bases de datos o sistemas de archivos, ya que estas operaciones pueden llevar tiempo y bloquear el flujo de ejecución si se realizaran de manera síncrona. JavaScript utiliza varios mecanismos para lograr el asincronismo:
+
+1) Callbacks:
+
+Guía de Callback Hell: http://callbackhell.com/
+
+Los callbacks son funciones que se pasan como argumentos a otras funciones y se ejecutan una vez que una operación asíncrona ha terminado. Aunque son efectivos, pueden llevar a un patrón llamado "callback hell", donde los callbacks anidados dificultan la legibilidad del código.
+
+Los callbacks desempeñan un papel crucial en el asincronismo de JavaScript al permitir que las operaciones asíncronas notifiquen y activen funciones una vez que han terminado. Un callback es simplemente una función que se pasa como argumento a otra función y se ejecuta en algún momento futuro, generalmente cuando se completa una operación asíncrona.
+
+Aquí está cómo funcionan los callbacks en el contexto del asincronismo de JavaScript:
+
+1. **Definición de una función que recibe un callback**:
+   Una función que realiza una operación asíncrona toma un callback como argumento. Esto se hace para especificar qué función debe ejecutarse cuando la operación asíncrona termine.
+
+2. **Ejecución de la operación asíncrona**:
+   La función asíncrona comienza a ejecutarse en segundo plano. Esto podría ser, por ejemplo, una solicitud a un servidor web o una espera de tiempo utilizando `setTimeout`.
+
+3. **Invocación del callback**:
+   Una vez que la operación asíncrona se completa, la función que la realizó invoca el callback proporcionado como argumento. Esto activa la ejecución del código dentro del callback.
+
+4. **Manejo de resultados o acciones adicionales**:
+   Dentro del callback, puedes manejar los resultados de la operación asíncrona o realizar acciones adicionales en función de esos resultados.
+
+Aquí hay un ejemplo simple que muestra cómo funcionan los callbacks en JavaScript:
+
+```javascript
+function procesoAsincrono(callback) {
+  setTimeout(() => {
+    console.log("Operación asíncrona completada");
+    callback();
+  }, 2000);
+}
+
+function callback() {
+  console.log("Callback ejecutado");
+}
+
+console.log("Inicio");
+
+procesoAsincrono(callback);
+
+console.log("Fin");
+```
+
+Las funciones de primera clase en JavaScript facilitan el asincronismo porque pueden tratarse como cualquier otro valor, como números o cadenas. Esto significa que puedes pasar funciones como argumentos a otras funciones, devolver funciones desde funciones y asignar funciones a variables. Esta capacidad es fundamental para implementar callbacks y otros mecanismos asincrónicos en JavaScript.
+
+2) Promesas
+
+Las promesas son objetos que representan un valor que puede estar disponible ahora, en el futuro o nunca. Proporcionan una sintaxis más limpia y estructurada para trabajar con operaciones asíncronas y manerar errores. Aquí hay un ejemplo:
+
+console.log("Inicio");
+
+function procesoAsincrono() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log("Proceso Asíncrono Terminado");
+      resolve();
+    }, 2000);
+  });
+}
+
+procesoAsincrono()
+  .then(() => {
+    console.log("Promesa resuelta");
+  })
+  .catch((error) => {
+    console.error("Error en la promesa:", error);
+  });
+
+console.log("Fin");
+
+
+3) Async/Await
+
+La sintaxsis async/await es una forma moderna y legible de trabajar con operaciones asíncronas en JavaScript. Las funciones marcadas como "async" pueden pausar su ejecución con la palabra clave "await" hasta que una promesa se resuelva. Estoy permite escribir código asincrónico de manera más similar a código síncrono. 
+
+console.log("Inicio");
+
+function esperar(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function procesoAsincrono() {
+  await esperar(2000);
+  console.log("Proceso Asíncrono Terminado");
+}
+
+async function ejecutar() {
+  await procesoAsincrono();
+  console.log("Fin");
+}
+
+ejecutar();
+
+
+EL MODELO DE JAVASCRIPT
+
+JavaScript fue diseñado para ser ejecutado en navegadores, trabajar con peticiones sobre la red y procesar las interacciones de usuario, al tiempo que se mantiene una interfaz fluida. Ser bloqueante o síncrono no ayudaría a conseguir estos objetivos, es por ello que Javascript ha evolucionado intencionalmente pensando en operaciones del tipo Input/Output. Por esta razón:
+
+- Javascript utiliza un modelo asíncrono y no bloqueante, con un loop de eventos implementado con un único thread para sus interfaces de entrada/salida.
+
+En el contexto de la programación, "I/O" significa "entrada/salida" (Input/Output en inglés). Se refiere al proceso de intercambio de datos entre un programa y el mundo exterior, que puede incluir dispositivos físicos como teclados, monitores, discos duros, así como conexiones de red y otros sistemas.
+
+En el caso de JavaScript, que generalmente se ejecuta en navegadores web o en entornos de servidor a través de plataformas como Node.js, la entrada/salida se maneja de manera asincrónica debido a la naturaleza basada en eventos del lenguaje. Esto significa que las operaciones de entrada/salida no bloquean la ejecución del programa mientras esperan que se completen.
+
+Algunos ejemplos de operaciones de entrada/salida en JavaScript incluyen:
+
+1. **Lectura y escritura de archivos:** En Node.js, puedes usar módulos como `fs` para trabajar con archivos en el sistema de archivos.
+
+2. **Solicitudes de red:** Puedes hacer solicitudes HTTP o realizar comunicaciones en red utilizando API como `fetch` en navegadores web o módulos específicos de red en Node.js.
+
+3. **Interacción con el usuario:** Esto se aplica especialmente a los navegadores, donde puedes obtener entrada del usuario a través de formularios, botones y otros elementos de la interfaz.
+
+4. **Temporizadores y eventos:** Crear temporizadores y manejar eventos también puede considerarse como operaciones de entrada/salida, ya que implican la interacción del programa con el sistema subyacente.
+
+Debido a la naturaleza asíncrona de JavaScript, es importante manejar adecuadamente las operaciones de entrada/salida para evitar bloqueos y asegurarse de que el programa continúe siendo receptivo y capaz de manejar múltiples tareas simultáneamente. Esto a menudo se logra mediante el uso de callbacks, promesas o, más recientemente, async/await para gestionar la asincronía de manera más legible y estructurada.
