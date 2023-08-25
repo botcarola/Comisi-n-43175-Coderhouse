@@ -2139,3 +2139,244 @@ Algunos ejemplos de operaciones de entrada/salida en JavaScript incluyen:
 4. **Temporizadores y eventos:** Crear temporizadores y manejar eventos también puede considerarse como operaciones de entrada/salida, ya que implican la interacción del programa con el sistema subyacente.
 
 Debido a la naturaleza asíncrona de JavaScript, es importante manejar adecuadamente las operaciones de entrada/salida para evitar bloqueos y asegurarse de que el programa continúe siendo receptivo y capaz de manejar múltiples tareas simultáneamente. Esto a menudo se logra mediante el uso de callbacks, promesas o, más recientemente, async/await para gestionar la asincronía de manera más legible y estructurada.
+
+_____________________________________________________________________________________________
+
+CLASE 16: AJAX Y FETCH
+
+AJAX, acrónimo de Asynchronous JavaScript And XML (JavaScript asíncrono y XML), es una técnica de desarrollo web para crear aplicaciones web asíncronas. Estas aplicaciones se ejecutan en el cliente, es decir, en el navegador de los usuarios mientras se mantiene la comunicación asíncrona con el servidor en segundo plano. De esta forma es posible interactuar con el servidor sin necesidad de recargar la página web, mejorando la interactividad, velocidad y usabilidad en las aplicaciones.
+
+Ajax es una tecnología asíncrona, en el sentido de que los datos adicionales se solicitan al servidor y se cargan en segundo plano sin interferir con la visualización ni el comportamiento de la página, aunque existe la posibilidad de configurar las peticiones como síncronas de tal forma que la interactividad de la página se detiene hasta la espera de la respuesta por parte del servidor.
+
+JavaScript es un lenguaje de programación (scripting language) en el que normalmente se efectúan las funciones de llamada de Ajax mientras que el acceso a los datos se realiza mediante XMLHttpRequest, objeto disponible en los navegadores actuales. En cualquier caso, no es necesario que el contenido asíncrono esté formateado en XML.
+
+Ajax es una técnica válida para múltiples plataformas y utilizable en muchos sistemas operativos y navegadores dado que está basado en estándares abiertos como JavaScript y Document Object Model (DOM).
+
+Aquí hay una explicación detallada del proceso de AJAX y cómo ha evolucionado el paradigma:
+
+Proceso de AJAX:
+
+Solicitud Inicial: Cuando un usuario realiza una acción en una página web, como hacer clic en un botón, el navegador genera una solicitud HTTP al servidor.
+
+Manejo del Servidor: El servidor procesa la solicitud y devuelve una respuesta, generalmente en formato JSON, XML o HTML. Esta respuesta puede contener datos actualizados o instrucciones para actualizar la interfaz.
+
+JavaScript en el Cliente: En lugar de cargar una página completamente nueva, se utiliza JavaScript en el navegador para procesar la respuesta del servidor y actualizar el contenido de la página de manera dinámica.
+
+Manipulación del DOM: El JavaScript manipula el Document Object Model (DOM) de la página web. Puede agregar, modificar o eliminar elementos del DOM para reflejar los cambios necesarios en la interfaz.
+
+Actualización Visual: Los cambios realizados en el DOM se muestran de manera instantánea en la página, lo que brinda una experiencia de usuario más rápida y suave.
+
+Evolución del Paradigma:
+
+A medida que las tecnologías web han avanzado, el paradigma de AJAX ha evolucionado para adaptarse a las demandas cambiantes de desarrollo y las expectativas de los usuarios:
+
+Ampliación de Funcionalidades: Además de XML, las respuestas del servidor ahora suelen estar en formato JSON, que es más ligero y fácil de analizar en JavaScript. Esto ha llevado a la popularización del término "AJAJ" (Asynchronous JavaScript and JSON).
+
+Librerías y Frameworks: Se han desarrollado librerías y frameworks como jQuery, Angular, React y Vue.js, que simplifican la implementación de AJAX y proporcionan estructuras más poderosas para construir aplicaciones web interactivas.
+
+HTML5 y APIs: HTML5 introdujo nuevas APIs como Fetch API y XMLHttpRequest Level 2, que ofrecen formas más modernas y flexibles de realizar solicitudes AJAX.
+
+SPA y PWAs: Con la creación de Single Page Applications (SPA) y Progressive Web Apps (PWA), las aplicaciones web modernas a menudo utilizan AJAX para cargar contenido de manera dinámica y proporcionar experiencias de usuario más cercanas a las aplicaciones nativas.
+
+Optimización de Rendimiento: Se han implementado técnicas como la compresión de datos, el almacenamiento en caché y la precarga de recursos para mejorar el rendimiento y la velocidad de las solicitudes AJAX.
+
+En resumen, AJAX es una técnica que ha revolucionado la forma en que los sitios web interactúan con los usuarios al permitir actualizaciones dinámicas sin recargar toda la página. A medida que las tecnologías web han avanzado, AJAX ha evolucionado para adaptarse a las necesidades cambiantes del desarrollo web y sigue siendo una parte fundamental en la creación de experiencias web interactivas y eficientes.
+
+--------------------------------------------------------------------
+
+MODELO CLIENTE - SERVIDOR
+
+El modelo cliente-servidor es un paradigma de arquitectura en el desarrollo de software que se utiliza ampliamente en aplicaciones web y sistemas distribuidos. En este modelo, un sistema se divide en dos componentes principales: el cliente y el servidor. Cada uno de estos componentes tiene roles y responsabilidades específicos en la interacción y el intercambio de información. AJAX se relaciona con este modelo al facilitar la comunicación asincrónica entre el cliente y el servidor para actualizar contenido en tiempo real en las aplicaciones web.
+
+Cliente:
+
+El cliente es la parte de la aplicación con la que interactúa directamente el usuario. Puede ser un navegador web, una aplicación móvil o cualquier otra interfaz de usuario.
+El cliente se encarga de presentar la información al usuario de manera amigable y de gestionar las interacciones del usuario, como hacer clic en botones, enviar formularios, etc.
+En el contexto web, el cliente generalmente utiliza tecnologías como HTML, CSS y JavaScript para crear la interfaz de usuario y manejar la interacción.
+Servidor:
+
+El servidor es la parte del sistema que gestiona la lógica de negocio, el almacenamiento de datos y las operaciones que requieren procesamiento del lado del servidor.
+Recibe solicitudes del cliente, procesa la información necesaria y proporciona respuestas adecuadas. Puede realizar cálculos, acceder a bases de datos y tomar decisiones basadas en la lógica de la aplicación.
+En el contexto web, el servidor suele ser un sistema que ejecuta un servidor web y aplicaciones back-end que se comunican con el cliente.
+Relación con AJAX:
+La relación entre el modelo cliente-servidor y AJAX se da en el contexto de la comunicación entre el cliente y el servidor en aplicaciones web. AJAX permite la comunicación asincrónica entre ambos componentes, lo que mejora la experiencia del usuario y reduce la necesidad de recargar páginas completas. Aquí hay cómo se relacionan:
+
+Solicitud del Cliente (Cliente): Cuando el usuario interactúa con la aplicación, el cliente genera solicitudes HTTP al se  rvidor para obtener o enviar datos.
+
+Procesamiento en el Servidor (Servidor): El servidor procesa las solicitudes del cliente, realiza acciones necesarias y prepara la respuesta.
+
+Respuesta del Servidor (Servidor): El servidor envía la respuesta al cliente, que generalmente contiene datos en formato JSON, XML o HTML.
+
+Manipulación en el Cliente (Cliente - AJAX): En lugar de recargar toda la página, el cliente utiliza AJAX para enviar solicitudes asincrónicas al servidor y recibir respuestas. JavaScript se encarga de manejar estas solicitudes y respuestas.
+
+Actualización de la Interfaz (Cliente - JavaScript): Con los datos recibidos a través de AJAX, JavaScript manipula el DOM de la página para actualizar el contenido de manera dinámica, lo que brinda una experiencia más fluida y rápida al usuario.
+
+En resumen, AJAX permite que el modelo cliente-servidor se aproveche al máximo en aplicaciones web, permitiendo interacciones asincrónicas que actualizan el contenido de la página sin recargarla por completo. Esto resulta en interfaces de usuario más dinámicas y responsivas.
+
+--------------------------------------------------------------
+
+PETICIONES HTTP
+
+Las peticiones HTTP (Hypertext Transfer Protocol) son un conjunto de mensajes que un cliente envía a un servidor para solicitar recursos o acciones específicas. HTTP es el protocolo utilizado en la World Wide Web para la comunicación entre navegadores web y servidores. Una petición HTTP es la base de la interacción entre el cliente (por ejemplo, un navegador web) y el servidor que aloja una aplicación web o sitio web.
+
+**Funcionamiento de una Petición HTTP:**
+
+1. **Inicio de la Solicitud:** Cuando un usuario ingresa una URL en la barra de direcciones del navegador, hace clic en un enlace o realiza una acción que requiere una interacción con el servidor, se inicia una petición HTTP.
+
+2. **Construcción de la Petición:** El navegador crea una petición HTTP que contiene información sobre qué recurso se está solicitando y cómo se quiere interactuar con él. Esta información se agrupa en varias partes dentro de la petición.
+
+3. **Envío de la Petición:** La petición HTTP se envía desde el cliente (navegador) al servidor. Esto se realiza a través de la red, utilizando el protocolo TCP/IP.
+
+4. **Procesamiento en el Servidor:** El servidor recibe la petición y la procesa. Realiza las acciones necesarias según la solicitud y los datos adjuntos.
+
+5. **Generación de la Respuesta:** Después de procesar la solicitud, el servidor genera una respuesta HTTP que contiene el recurso solicitado (como una página HTML, una imagen o datos) o información sobre el estado de la operación.
+
+6. **Envío de la Respuesta:** La respuesta HTTP se envía desde el servidor al cliente, siguiendo el mismo proceso de comunicación a través de la red.
+
+7. **Interpretación por el Cliente:** El cliente (navegador) interpreta la respuesta HTTP y realiza las acciones necesarias en función de su contenido. Puede mostrar una página web, cargar imágenes, ejecutar scripts, etc.
+
+**Partes de una Petición HTTP:**
+
+Una petición HTTP consta de varias partes clave:
+
+1. **Línea de Petición:** Contiene el método de solicitud (GET, POST, PUT, DELETE, etc.), la URL del recurso y la versión del protocolo HTTP.
+
+2. **Cabeceras (Headers):** Proporcionan información adicional sobre la solicitud, como el tipo de contenido aceptado, las cookies, la longitud del contenido, etc.
+
+3. **Cuerpo de la Petición:** Presente en solicitudes como POST o PUT, contiene los datos enviados al servidor. Puede ser información de formulario, datos en formato JSON, archivos adjuntos, etc.
+
+**Ejemplo de una Petición HTTP:**
+
+```
+GET /ejemplo/index.html HTTP/1.1
+Host: www.ejemplo.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+```
+
+En este ejemplo:
+- La línea de petición indica que se está realizando una solicitud GET a la URL `/ejemplo/index.html` utilizando HTTP/1.1.
+- Las cabeceras especifican el host, el agente de usuario (navegador) y los tipos de contenido aceptados.
+
+En resumen, las peticiones HTTP son la base de la comunicación entre clientes (navegadores) y servidores en la web. Están compuestas por varias partes, incluida la línea de petición, las cabeceras y, en algunos casos, el cuerpo de la petición. Estas peticiones permiten a los usuarios acceder a recursos y realizar acciones en aplicaciones y sitios web.
+
+------------------------------------------------
+
+URL
+
+Una URL (Uniform Resource Locator) es una cadena de caracteres que se utiliza para identificar de manera única una dirección en la web, como una página web, una imagen, un archivo, etc. Una URL se divide en varias partes, que indican la ubicación y el tipo de recurso al que se hace referencia. Las partes principales de una URL son las siguientes:
+
+1. **Esquema (Scheme)**: Indica el protocolo que se utilizará para acceder al recurso. Por ejemplo, "http", "https", "ftp", "mailto", etc.
+
+2. **Prefijo "://":** Este separador sigue al esquema y precede al resto de la URL.
+
+3. **Usuario y contraseña (Userinfo):** Algunas URLs incluyen información de autenticación, como un nombre de usuario y una contraseña, aunque este uso es menos común en la actualidad debido a preocupaciones de seguridad.
+
+4. **Nombre de host (Host):** Indica la dirección IP numérica o el nombre de dominio del servidor donde se encuentra el recurso. Por ejemplo, "www.ejemplo.com".
+
+5. **Puerto (Port):** Especifica el puerto en el servidor que se utilizará para la conexión. Si se omite, se usa el puerto predeterminado asociado al esquema (por ejemplo, el puerto 80 para HTTP).
+
+6. **Ruta (Path):** Especifica la ubicación del recurso en el servidor. Puede ser una estructura jerárquica de directorios y subdirectorios.
+
+7. **Consulta (Query):** Contiene parámetros de consulta para enviar al recurso. Se utiliza principalmente en las URL de las páginas web para enviar información adicional al servidor.
+
+8. **Fragmento (Fragment):** Identifica una sección específica dentro del recurso, como un ancla en una página HTML. No se envía al servidor, sino que se utiliza en el lado del cliente.
+
+En resumen, una URL completa tiene la siguiente estructura:
+
+```
+esquema://usuario:contraseña@nombre_de_host:puerto/ruta?consulta#fragmento
+```
+
+Es importante mencionar que no todas las partes son obligatorias en una URL. Por ejemplo, las partes de usuario y contraseña son menos comunes debido a preocupaciones de seguridad y las partes de puerto, consulta y fragmento pueden ser opcionales según el recurso al que se acceda.
+
+-----------------------------------------------------------------------
+
+PETICIONES HTTP EN JAVASCRIPT
+
+En JavaScript, puedes realizar peticiones HTTP utilizando el objeto `XMLHttpRequest` o la API `Fetch`. Ambas opciones te permiten comunicarte con servidores y obtener o enviar datos de manera asincrónica. Aquí tienes una explicación y ejemplos de ambas opciones:
+
+### Usando XMLHttpRequest:
+
+El objeto `XMLHttpRequest` te permite realizar peticiones HTTP de manera asincrónica en JavaScript. Aquí tienes un ejemplo básico de cómo usarlo para realizar una solicitud GET:
+
+```javascript
+// Crear una instancia de XMLHttpRequest
+var xhr = new XMLHttpRequest();
+
+// Definir la función de manejo de eventos para cuando la solicitud se complete
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    // La respuesta del servidor está disponible en xhr.responseText
+    console.log(xhr.responseText);
+  }
+};
+
+// Abrir la solicitud
+xhr.open("GET", "https://api.example.com/data", true);
+
+// Enviar la solicitud
+xhr.send();
+```
+
+### Usando Fetch API:
+
+La API `Fetch` es una forma más moderna y flexible de realizar peticiones HTTP en JavaScript. Proporciona una interfaz más sencilla y promesas para manejar respuestas. Aquí tienes un ejemplo de cómo usar `Fetch` para realizar una solicitud GET:
+
+```javascript
+// Realizar una solicitud GET
+fetch("https://api.example.com/data")
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json(); // Parsear la respuesta como JSON
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error("Fetch error:", error);
+  });
+```
+
+Si deseas realizar una solicitud POST con datos JSON utilizando `Fetch`:
+
+```javascript
+var dataToSend = {
+  key1: "value1",
+  key2: "value2"
+};
+
+fetch("https://api.example.com/submit", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(dataToSend)
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error("Fetch error:", error);
+  });
+```
+
+En ambos ejemplos, el código en el bloque `.then` maneja la respuesta del servidor. En el caso de `Fetch`, también se utiliza `.catch` para manejar errores de red o de solicitud.
+
+Ambas opciones, `XMLHttpRequest` y `Fetch`, te permiten realizar peticiones HTTP y manejar las respuestas de manera efectiva en aplicaciones web. Sin embargo, `Fetch` es una opción más moderna y recomendada en la mayoría de los casos debido a su simplicidad y compatibilidad con las promesas de JavaScript.
+
+
+--------------------------------------------------------------
+
+Restricciones de llamados a archivos json con fetch:
+
+La restricción que impide hacer solicitudes Fetch a archivos locales en tu computadora está relacionada con la política de seguridad del navegador, conocida como la política de mismo origen (Same-Origin Policy). Esta política está diseñada para proteger a los usuarios al evitar que sitios web maliciosos accedan a recursos locales o privados en tu computadora sin tu consentimiento.
+
+La política de mismo origen establece que una página web solo puede realizar solicitudes a recursos (como archivos, imágenes o datos) ubicados en el mismo origen (protocolo, dominio y puerto) que la página web en sí. Esto significa que si estás cargando una página web desde una ubicación local (por ejemplo, usando el prefijo `file://` en la URL), no podrás hacer solicitudes Fetch a recursos locales utilizando rutas relativas o absolutas en tu sistema de archivos.
+
+Esta restricción es una medida de seguridad importante, ya que evita que sitios web maliciosos o no autorizados accedan a información confidencial de tu computadora.
+
+Para realizar pruebas y desarrollo local, puedes considerar usar un servidor web local, como el servidor proporcionado por la extensión "Live Server" en Visual Studio Code, o instalar herramientas como XAMPP, WAMP o Node.js para configurar un servidor local. Esto permitirá que tu página web sea cargada a través de un servidor local en lugar de acceder a ella directamente desde el sistema de archivos, lo que te permitirá realizar solicitudes Fetch a recursos dentro del mismo servidor local.
